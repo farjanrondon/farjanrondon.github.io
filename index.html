@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farjan Rondón, Electrical Engineer</title>
+<meta name="description" content="Electrical engineer from Universidad Simón Bolívar. Power flow and transient stability analysis in Python and MATLAB. Open to remote work.">
+<meta property="og:title" content="Farjan Rondón, Electrical Engineer">
+<meta property="og:description" content="Power flow and transient stability analysis in Python and MATLAB. Open to remote work in power system studies and electrical design.">
+<meta property="og:url" content="https://farjanrondon.github.io/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A6C74'/%3E%3Cpath d='M4 16c3-9 6-9 8 0s5 9 8 0 5-9 8 0' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F3F5F4;
+    --panel: #E7ECEB;
+    --ink: #1A2127;
+    --muted: #56616B;
+    --rule: #C6CFD2;
+    --accent: #0A6C74;
+    --warn: #B3261E;
+    --sans: "Barlow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --cond: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --wrap: 1040px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #172026;
+      --panel: #1F2B32;
+      --ink: #E3E9EC;
+      --muted: #9AA8B1;
+      --rule: #34444D;
+      --accent: #5CC3CA;
+      --warn: #F28B82;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-feature-settings: "tnum" 0;
+  }
+  a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  a:hover { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  img, svg { max-width: 100%; }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+  section { padding: 56px 0; border-top: 1px solid var(--rule); }
+
+  h1, h2, h3 { font-family: var(--cond); font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: 0.005em; }
+  h2 { font-size: clamp(1.75rem, 3.4vw, 2.25rem); margin-bottom: 12px; }
+  h3 { font-size: 1.45rem; }
+  p { margin: 0 0 1em; max-width: 68ch; }
+
+  /* ---------- masthead ---------- */
+  .masthead { padding: 64px 0 48px; }
+  .masthead h1 {
+    font-size: clamp(3rem, 9vw, 6.25rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    margin-bottom: 20px;
+  }
+  .lede { font-size: 1.25rem; line-height: 1.5; max-width: 60ch; color: var(--ink); }
+  .contact { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 28px 0 0; padding: 0; list-style: none; font-weight: 500; }
+  .contact a { text-decoration-line: underline; }
+
+  /* ---------- swing curve demo ---------- */
+  .demo-intro { margin-bottom: 28px; }
+  .demo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-areas: "plot oneline" "plot control";
+    grid-template-rows: auto 1fr;
+    gap: 22px 28px;
+    align-items: start;
+  }
+  .plot { grid-area: plot; }
+  .oneline { grid-area: oneline; }
+  .control { grid-area: control; }
+  .plot {
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 16px 12px 8px;
+    margin: 0;
+  }
+  .plot svg { display: block; width: 100%; height: auto; }
+    .gridline { stroke: var(--rule); stroke-width: 1; }
+  .limit { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 4; }
+  .fault-band { fill: var(--warn); opacity: 0.09; }
+  .clearing { stroke: var(--ink); stroke-width: 1.25; stroke-dasharray: 2 3; }
+  .trace { fill: none; stroke: var(--accent); stroke-width: 2.75; stroke-linejoin: round; stroke-linecap: round; }
+  .trace.lost { stroke: var(--warn); }
+  .label { fill: var(--ink); font: 500 13px var(--sans); }
+  .label.muted { fill: var(--muted); }
+
+  .oneline { margin: 0; }
+  .oneline svg { display: block; width: 100%; height: auto; }
+  .oneline .wire { stroke: var(--ink); stroke-width: 2; fill: none; }
+  .oneline .busbar { stroke: var(--ink); stroke-width: 5; stroke-linecap: square; }
+  .oneline .breaker { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
+  .oneline .fault { fill: none; stroke: var(--warn); stroke-width: 2.25; stroke-linejoin: round; }
+  .oneline text { fill: var(--muted); font: 500 12px var(--sans); }
+  .oneline figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
+
+  .control label { display: block; font-weight: 600; margin-bottom: 6px; }
+  .control .value { font-family: var(--cond); font-size: 2.4rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+  .control .unit { font-size: 1.1rem; color: var(--muted); margin-left: 4px; }
+  input[type="range"] { width: 100%; margin: 14px 0 4px; accent-color: var(--accent); height: 28px; }
+  .scale { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .verdict { margin-top: 14px; padding-left: 12px; border-left: 3px solid var(--accent); font-weight: 500; min-height: 3.1em; }
+  .verdict.lost { border-left-color: var(--warn); }
+  .cct { font-size: 0.95rem; color: var(--muted); margin: 8px 0 0; }
+  .model-note { font-size: 0.92rem; color: var(--muted); margin-top: 22px; max-width: 80ch; }
+
+  /* ---------- projects ---------- */
+  .project { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 8px 40px; padding: 32px 0; border-bottom: 1px solid var(--rule); }
+  .project:last-of-type { border-bottom: 0; }
+  .project .meta { color: var(--muted); font-size: 0.95rem; }
+  .project .meta strong { display: block; color: var(--ink); font-weight: 600; }
+  .project h3 { margin-bottom: 10px; }
+  .project .code-link { font-weight: 600; }
+
+  .pipeline { list-style: none; padding: 0; margin: 18px 0 20px; display: flex; flex-wrap: wrap; gap: 8px 0; counter-reset: step; max-width: 68ch; }
+  .pipeline li {
+    counter-increment: step;
+    position: relative;
+    padding: 8px 14px 8px 12px;
+    margin-right: 8px;
+    background: var(--panel);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .pipeline li::before { content: counter(step); color: var(--accent); font-family: var(--cond); font-weight: 600; margin-right: 8px; }
+
+  .minor { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 8px; }
+  .minor h4 { font-family: var(--sans); font-size: 1.05rem; font-weight: 600; margin: 0 0 6px; }
+  .minor p { font-size: 0.97rem; color: var(--muted); margin: 0; }
+
+  /* ---------- background ---------- */
+  .two-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
+  .entries { list-style: none; margin: 16px 0 0; padding: 0; }
+  .entries li { padding: 14px 0; border-top: 1px solid var(--rule); }
+  .entries li:first-child { border-top: 0; padding-top: 4px; }
+  .entries time, .entries .when { display: block; font-size: 0.92rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .entries .what { font-weight: 600; display: block; }
+  .entries p { margin: 4px 0 0; font-size: 0.98rem; }
+  h3.sub { font-size: 1.3rem; margin-top: 36px; }
+
+  .skills { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 10px 32px; margin: 16px 0 0; }
+  .skills dt { font-weight: 600; }
+  .skills dd { margin: 0; color: var(--ink); }
+
+  /* ---------- title block footer ---------- */
+  footer { padding: 40px 0 56px; border-top: 1px solid var(--rule); }
+  .titleblock { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.4fr 0.8fr; border: 1.5px solid var(--ink); }
+  .titleblock div { padding: 10px 14px; border-left: 1px solid var(--ink); }
+  .titleblock div:first-child { border-left: 0; }
+  .titleblock span { display: block; font-size: 0.78rem; color: var(--muted); }
+  .titleblock b { font-weight: 600; font-size: 0.98rem; overflow-wrap: anywhere; }
+
+  @media (max-width: 860px) {
+    .demo-grid { grid-template-columns: 1fr; grid-template-areas: "oneline" "plot" "control"; grid-template-rows: auto; }
+    .oneline svg { max-width: 320px; }
+    .project { grid-template-columns: 1fr; }
+    .minor { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; gap: 24px; }
+    .titleblock { grid-template-columns: 1fr 1fr; }
+    .titleblock div { border-left: 0; border-top: 1px solid var(--ink); }
+    .titleblock div:nth-child(-n+2) { border-top: 0; }
+    .titleblock div:nth-child(even) { border-left: 1px solid var(--ink); }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 18px; }
+    section { padding: 44px 0; }
+    .skills { grid-template-columns: 1fr; gap: 2px; }
+    .skills dd { margin-bottom: 10px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .trace.draw { animation: draw 1.6s ease-out forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <h1>Farjan Rondón</h1>
+    <p class="lede">Electrical engineer from Universidad Simón Bolívar in Caracas, Venezuela. I work on power systems analysis and write the Python and MATLAB tools behind it. Open to remote work in power system studies and electrical design.</p>
+    <ul class="contact">
+      <li><a href="https://github.com/farjanrondon">GitHub</a></li>
+      <li><a href="mailto:farjan.santos@gmail.com">farjan.santos@gmail.com</a></li>
+      <!-- Upload your CV to this repository with exactly this file name -->
+      <li><a href="CV_Farjan_Rondon.pdf">Download CV (PDF)</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section id="stability" aria-labelledby="stability-title">
+    <div class="wrap">
+      <div class="demo-intro">
+        <h2 id="stability-title">How fast does a fault need to be cleared?</h2>
+        <p>A generator feeds the grid through two parallel lines, and a three-phase fault hits one of them. Move the clearing time and watch the rotor angle: clear the fault quickly and the machine swings back; wait too long and it loses synchronism.</p>
+      </div>
+
+      <div class="demo-grid">
+        <figure class="plot">
+          <svg id="swing" viewBox="0 0 640 380" role="img" aria-labelledby="swing-desc">
+            <desc id="swing-desc">Rotor angle in degrees versus time in seconds after the fault, for the selected clearing time.</desc>
+            <rect id="faultBand" class="fault-band" x="0" y="0" width="0" height="0"></rect>
+            <g id="grid"></g>
+            <line id="clearLine" class="clearing" x1="0" y1="20" x2="0" y2="330"></line>
+            <text id="clearLabel" class="label" x="0" y="14">fault cleared</text>
+            <polyline id="trace" class="trace" points=""></polyline>
+          </svg>
+        </figure>
+
+          <figure class="oneline">
+            <svg viewBox="0 0 300 150" aria-labelledby="oneline-desc" role="img">
+              <desc id="oneline-desc">One-line diagram: generator connected to a bus, two parallel lines to the grid, fault on the lower line with breakers at both ends.</desc>
+              <circle cx="28" cy="75" r="18" class="wire"></circle>
+              <path d="M18 75 q5 -9 10 0 t10 0" class="wire"></path>
+              <line x1="46" y1="75" x2="78" y2="75" class="wire"></line>
+              <line x1="78" y1="40" x2="78" y2="110" class="busbar"></line>
+              <line x1="78" y1="50" x2="232" y2="50" class="wire"></line>
+              <line x1="78" y1="100" x2="232" y2="100" class="wire"></line>
+              <rect x="94" y="93" width="14" height="14" class="breaker"></rect>
+              <rect x="202" y="93" width="14" height="14" class="breaker"></rect>
+              <path d="M126 76 l10 12 l-7 3 l10 12" class="fault"></path>
+              <line x1="232" y1="40" x2="232" y2="110" class="busbar"></line>
+              <line x1="232" y1="75" x2="258" y2="75" class="wire"></line>
+              <path d="M258 60 v30 M264 64 v22 M270 68 v14" class="wire"></path>
+              <text x="12" y="120">Generator</text>
+              <text x="140" y="42">Line 1</text>
+              <text x="140" y="126">Line 2</text>
+              <text x="248" y="120">Grid</text>
+            </svg>
+            <figcaption>The fault on line 2 is cleared by opening its two breakers.</figcaption>
+          </figure>
+
+          <div class="control">
+            <label for="tc">Fault clearing time</label>
+            <div><span class="value" id="tcValue">150</span><span class="unit">ms</span></div>
+            <input type="range" id="tc" min="40" max="400" step="5" value="150" aria-describedby="verdict">
+            <div class="scale"><span>40 ms</span><span>400 ms</span></div>
+            <p class="verdict" id="verdict" aria-live="polite"></p>
+            <p class="cct" id="cct"></p>
+          </div>
+      </div>
+
+      <p class="model-note">Classical single-machine model at 60 Hz: H = 5 s, mechanical power 1.0 pu, maximum electrical power 2.0 pu before the fault, 0.5 pu during it and 1.5 pu after line 2 is disconnected. The swing equation is integrated in your browser with fourth-order Runge-Kutta. My MATLAB tool below runs the same kind of study on multi-machine networks.</p>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-title">
+    <div class="wrap">
+      <h2 id="projects-title">Projects</h2>
+
+      <article class="project">
+        <div class="meta"><strong>MATLAB</strong>Power flow and stability</div>
+        <div>
+          <h3>Power flow and transient stability analysis</h3>
+          <p>Reads a complete case from an Excel workbook (buses, lines, transformers and shunt elements), builds the Y-bus and solves the load flow with four methods. The DC solution can be used as the starting point for the iterative ones. The method with the lowest error then feeds a transient stability study: the network is expanded with the generators’ internal buses, Kron-reduced for the pre-fault, fault and post-fault states, and the swing equation is integrated for a line fault and clearing time chosen by the user.</p>
+          <ol class="pipeline" aria-label="Steps in the analysis">
+            <li>Excel case file</li>
+            <li>Y-bus matrix</li>
+            <li>Gauss-Seidel, Newton-Raphson, fast-decoupled, DC</li>
+            <li>Lowest-error solution</li>
+            <li>Kron reduction</li>
+            <li>Swing equation with Heun or RK4</li>
+            <li>Results back to Excel</li>
+          </ol>
+          <p>For each method the output workbook holds bus voltages and angles, line flows and losses, and the system power balance.</p>
+          <!-- Replace this link with the repository URL -->
+          <a class="code-link" href="https://github.com/farjanrondon">See the code on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="meta"><strong>Python</strong>pandas, NumPy</div>
+        <div>
+          <h3>Power flow solver</h3>
+          <p>The Python implementation of the load flow: Gauss-Seidel, Newton-Raphson, fast-decoupled and DC methods, with lines and off-nominal-tap transformers modeled as π-equivalents and loads modeled as ZIP (constant impedance, current and power). Each run saves a copy of the input workbook with the results, so different cases can be studied side by side.</p>
+          <!-- Replace this link with the repository URL -->
+          <a class="code-link" href="https://github.com/farjanrondon">See the code on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="meta"><strong>Capstone project</strong>Jan 2025 to Feb 2026</div>
+        <div>
+          <h3>Real-time temperature estimation in IGBTs and power diodes</h3>
+          <p>My undergraduate capstone at Universidad Simón Bolívar. I designed and assembled the laboratory test setups, designed and built a custom measurement circuit for real-time data acquisition, and wrote the scripts that process the experimental data and check it against the theoretical models.</p>
+        </div>
+      </article>
+
+      <h3 class="sub">Other code</h3>
+      <div class="minor">
+        <div>
+          <h4>Nutri.Calc</h4>
+          <p>Desktop app in Python and Tkinter for nutrition consultations. It calculates body mass index, body-fat percentage, and protein and calorie targets, and exports each consultation to Excel.</p>
+        </div>
+        <div>
+          <h4>Lead database</h4>
+          <p>A Python and SQLite exercise for storing and managing lead records.</p>
+        </div>
+        <div>
+          <h4>CI-2125</h4>
+          <p>C++ exercises from the Computación I course at Universidad Simón Bolívar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="background" aria-labelledby="background-title">
+    <div class="wrap">
+      <h2 id="background-title">Background</h2>
+      <div class="two-col">
+        <div>
+          <h3>Experience</h3>
+          <ul class="entries">
+            <li>
+              <span class="when">Oct 2025 to Jan 2026, Caracas</span>
+              <span class="what">Monitoring Analyst, Consorcio Credicard</span>
+              <p>Monitored payment-processing platforms in real time through dashboards and escalated anomalies. Audited the cooling systems and electrical backup infrastructure of the processing servers.</p>
+            </li>
+            <li>
+              <span class="when">Mar 2021 to May 2021, remote</span>
+              <span class="what">Web Developer, Universidad ISEP (Mexico)</span>
+              <p>Built custom Odoo modules in Python to automate the capture and storage of lead data, modernized legacy code and documented the integrations.</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>Education</h3>
+          <ul class="entries">
+            <li>
+              <span class="when">2018 to 2026</span>
+              <span class="what">Electrical Engineering, Universidad Simón Bolívar</span>
+              <p>All degree requirements completed; diploma pending. Focus on power systems, high-voltage engineering, protection, energy conversion and power electronics.</p>
+            </li>
+          </ul>
+          <h3 class="sub">Courses</h3>
+          <ul class="entries">
+            <li><span class="when">March 2026</span><span class="what">Earthing Systems: Measurement Methods, USB</span></li>
+            <li><span class="when">March 2025</span><span class="what">Introduction to Power Electronic Converter Design, USB</span></li>
+            <li><span class="when">March 2025</span><span class="what">High-Voltage Installations and Insulation Studies, USB</span></li>
+            <li><span class="when">March 2025</span><span class="what">Motor and Critical Load Protection in Industry and Mining using ETAP, Greener Engineering School</span></li>
+            <li><span class="when">January 2021</span><span class="what">Data Analysis with Python, IBM</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">Skills</h3>
+      <dl class="skills">
+        <dt>Power systems software</dt><dd>DIgSILENT PowerFactory (basic), ETAP (basic)</dd>
+        <dt>Drafting</dt><dd>AutoCAD (intermediate)</dd>
+        <dt>Programming</dt><dd>Python (pandas, NumPy), MATLAB, C/C++, SQL, Excel</dd>
+        <dt>Languages</dt><dd>Spanish (native), English (B2)</dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Engineer</span><b>Farjan Rondón</b></div>
+      <div><span>Discipline</span><b>Electrical, power systems</b></div>
+      <div><span>Location</span><b>Caracas, Venezuela</b></div>
+      <div><span>Contact</span><b><a href="mailto:farjan.santos@gmail.com">farjan.santos@gmail.com</a></b></div>
+      <div><span>Revision</span><b>Sep 2026</b></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Single machine, infinite bus, classical model
+  const f = 60, H = 5, Pm = 1.0;
+  const Pmax = { pre: 2.0, fault: 0.5, post: 1.5 };
+  const k = Math.PI * f / H;              // d2(delta)/dt2 = k * (Pm - Pe)
+  const d0 = Math.asin(Pm / Pmax.pre);    // pre-fault operating angle
+  const dt = 0.0005;
+  const T_PLOT = 2.5, T_SIM = 5.0;
+  const DEG = 180 / Math.PI;
+
+  function simulate(tc, tEnd, keepPoints) {
+    let d = d0, w = 0, t = 0, peak = d, lostAt = null;
+    const pts = keepPoints ? [[0, d]] : null;
+    const acc = (tt, dd) => k * (Pm - (tt < tc ? Pmax.fault : Pmax.post) * Math.sin(dd));
+    let n = 0;
+    while (t < tEnd - 1e-12) {
+      const k1d = w,                 k1w = acc(t, d);
+      const k2d = w + 0.5 * dt * k1w, k2w = acc(t + 0.5 * dt, d + 0.5 * dt * k1d);
+      const k3d = w + 0.5 * dt * k2w, k3w = acc(t + 0.5 * dt, d + 0.5 * dt * k2d);
+      const k4d = w + dt * k3w,       k4w = acc(t + dt, d + dt * k3d);
+      d += dt / 6 * (k1d + 2 * k2d + 2 * k3d + k4d);
+      w += dt / 6 * (k1w + 2 * k2w + 2 * k3w + k4w);
+      t += dt; n++;
+      if (d > peak) peak = d;
+      if (keepPoints && t <= T_PLOT + 1e-9 && n % 8 === 0 && d * DEG <= 205) pts.push([t, d]);
+      if (d > Math.PI) { lostAt = t; if (!keepPoints || t > T_PLOT || d * DEG > 205) break; }
+    }
+    return { pts, peak, lostAt };
+  }
+
+  // Critical clearing time by bisection
+  function criticalClearingTime() {
+    let lo = 0.01, hi = 1.0;
+    for (let i = 0; i < 30; i++) {
+      const mid = (lo + hi) / 2;
+      if (simulate(mid, T_SIM, false).lostAt === null) lo = mid; else hi = mid;
+    }
+    return lo;
+  }
+
+  // ----- chart -----
+  const svg = document.getElementById("swing");
+  const gridG = document.getElementById("grid");
+  const trace = document.getElementById("trace");
+  const clearLine = document.getElementById("clearLine");
+  const clearLabel = document.getElementById("clearLabel");
+  const faultBand = document.getElementById("faultBand");
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (name, attrs, text) => {
+    const e = document.createElementNS(NS, name);
+    for (const a in attrs) e.setAttribute(a, attrs[a]);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+  const yMax = 200;
+  let L = null; // current layout
+
+  function buildAxes() {
+    const narrow = svg.parentElement.clientWidth < 520;
+    const W = narrow ? 400 : 640, Ht = narrow ? 330 : 380;
+    const M = narrow ? { l: 58, r: 12, t: 24, b: 48 } : { l: 70, r: 16, t: 24, b: 50 };
+    const X0 = M.l, X1 = W - M.r, Y0 = Ht - M.b, Y1 = M.t;
+    L = { W, Ht, X0, X1, Y0, Y1, narrow,
+          sx: t => X0 + (t / T_PLOT) * (X1 - X0),
+          sy: deg => Y0 - (deg / yMax) * (Y0 - Y1) };
+    svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+    gridG.textContent = "";
+    for (let deg = 0; deg <= 180; deg += (narrow ? 60 : 30)) {
+      gridG.appendChild(el("line", { x1: X0, x2: X1, y1: L.sy(deg), y2: L.sy(deg), class: deg === 180 ? "limit" : "gridline" }));
+      gridG.appendChild(el("text", { x: X0 - 8, y: L.sy(deg) + 4, "text-anchor": "end", class: "label muted" }, deg + "°"));
+    }
+    for (let t = 0; t <= T_PLOT + 1e-9; t += (narrow ? 1.0 : 0.5)) {
+      gridG.appendChild(el("line", { x1: L.sx(t), x2: L.sx(t), y1: Y0, y2: Y0 + 6, class: "gridline" }));
+      gridG.appendChild(el("text", { x: L.sx(t), y: Y0 + 22, "text-anchor": "middle", class: "label muted" }, t.toFixed(1)));
+    }
+    gridG.appendChild(el("line", { x1: X0, x2: X1, y1: Y0, y2: Y0, class: "gridline" }));
+    gridG.appendChild(el("text", { x: (X0 + X1) / 2, y: Ht - 8, "text-anchor": "middle", class: "label muted" }, "Time after the fault (s)"));
+    gridG.appendChild(el("text", { x: 16, y: (Y0 + Y1) / 2, "text-anchor": "middle", class: "label muted", transform: `rotate(-90 16 ${(Y0 + Y1) / 2})` }, "Rotor angle"));
+    let clip = document.getElementById("plotArea");
+    if (!clip) {
+      clip = el("clipPath", { id: "plotArea" });
+      clip.appendChild(el("rect", {}));
+      svg.insertBefore(clip, svg.firstChild);
+      trace.setAttribute("clip-path", "url(#plotArea)");
+    }
+    const r = clip.firstChild;
+    r.setAttribute("x", X0); r.setAttribute("y", Y1 - 8);
+    r.setAttribute("width", X1 - X0 + 4); r.setAttribute("height", Y0 - Y1 + 8);
+  }
+  buildAxes();
+
+  const slider = document.getElementById("tc");
+  const tcValue = document.getElementById("tcValue");
+  const verdict = document.getElementById("verdict");
+  const cctEl = document.getElementById("cct");
+
+  const cct = criticalClearingTime();
+  cctEl.textContent = `Critical clearing time for this system: about ${Math.round(cct * 1000)} ms.`;
+
+  function render(animate) {
+    const tc = Number(slider.value) / 1000;
+    tcValue.textContent = slider.value;
+    const run = simulate(tc, T_SIM, true);
+    const lost = run.lostAt !== null;
+
+    trace.setAttribute("points", run.pts.map(p => `${L.sx(p[0]).toFixed(1)},${L.sy(p[1] * DEG).toFixed(1)}`).join(" "));
+    trace.classList.toggle("lost", lost);
+
+    const { X0, X1, Y0, Y1 } = L;
+    const x = L.sx(tc);
+    clearLine.setAttribute("x1", x); clearLine.setAttribute("x2", x);
+    clearLine.setAttribute("y1", Y1 - 4); clearLine.setAttribute("y2", Y0);
+    faultBand.setAttribute("x", X0); faultBand.setAttribute("y", Y1 - 4);
+    faultBand.setAttribute("width", Math.max(0, x - X0)); faultBand.setAttribute("height", Y0 - Y1 + 4);
+    const nearRight = x > X1 - 110;
+    clearLabel.setAttribute("x", nearRight ? x - 6 : x + 6);
+    clearLabel.setAttribute("text-anchor", nearRight ? "end" : "start");
+    clearLabel.setAttribute("y", Y1 + 10);
+
+    verdict.classList.toggle("lost", lost);
+    verdict.textContent = lost
+      ? `Unstable. The generator loses synchronism about ${run.lostAt.toFixed(2)} s after the fault.`
+      : `Stable. The rotor angle peaks at ${Math.round(run.peak * DEG)}° and swings back.`;
+
+    if (animate) {
+      const len = trace.getTotalLength();
+      trace.style.strokeDasharray = len;
+      trace.style.strokeDashoffset = len;
+      trace.classList.add("draw");
+    } else {
+      trace.classList.remove("draw");
+      trace.style.strokeDasharray = "";
+      trace.style.strokeDashoffset = "";
+    }
+  }
+
+  slider.addEventListener("input", () => render(false));
+  let lastNarrow = null;
+  window.addEventListener("resize", () => {
+    const narrow = svg.parentElement.clientWidth < 520;
+    if (narrow !== lastNarrow) { lastNarrow = narrow; buildAxes(); render(false); }
+  });
+  lastNarrow = L.narrow;
+  render(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+})();
+</script>
+</body>
+</html>

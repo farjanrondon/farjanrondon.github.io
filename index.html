@@ -4,659 +4,415 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Farjan Rondón, Electrical Engineer</title>
-<meta name="description" content="Electrical engineer from Universidad Simón Bolívar with a strong foundation in power systems, high-voltage infrastructure and transmission line design.">
+<meta name="description" content="Electrical engineer from Universidad Simón Bolívar. Power flow and transient stability analysis in Python and MATLAB. Open to remote work.">
 <meta property="og:title" content="Farjan Rondón, Electrical Engineer">
-<meta property="og:description" content="Power systems, power electronics and engineering computation. Projects, experience and interactive demos.">
+<meta property="og:description" content="Power flow and transient stability analysis in Python and MATLAB. Open to remote work in power system studies and electrical design.">
 <meta property="og:url" content="https://farjanrondon.github.io/">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A6C74'/%3E%3Cpath d='M4 16c3-9 6-9 8 0s5 9 8 0 5-9 8 0' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A6C74'/%3E%3Cpath d='M4 16c3-9 6-9 8 0s5 9 8 0 5-9 8 0' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
-<script>
-  // Apply a saved theme before the page paints
-  try { const t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #F2F5F4;
-    --surface: #FCFDFC;
-    --panel: #E6ECEB;
-    --ink: #172026;
-    --muted: #55626C;
-    --rule: #CDD6D8;
+    --paper: #F3F5F4;
+    --panel: #E7ECEB;
+    --ink: #1A2127;
+    --muted: #56616B;
+    --rule: #C6CFD2;
     --accent: #0A6C74;
-    --accent-ink: #FFFFFF;
-    --accent-soft: #D6E9E8;
     --warn: #B3261E;
-    --warn-soft: #F6DEDB;
     --sans: "Barlow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     --cond: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
-    --wrap: 1120px;
-    color-scheme: light;
+    --wrap: 1040px;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #131B20; --surface: #19242A; --panel: #213039; --ink: #E4EAED; --muted: #9DABB4;
-      --rule: #2E3E47; --accent: #5CC3CA; --accent-ink: #0E1A1E; --accent-soft: #1D3A3E;
-      --warn: #F28B82; --warn-soft: #3F2624; color-scheme: dark;
+    :root {
+      --paper: #172026;
+      --panel: #1F2B32;
+      --ink: #E3E9EC;
+      --muted: #9AA8B1;
+      --rule: #34444D;
+      --accent: #5CC3CA;
+      --warn: #F28B82;
     }
-  }
-  :root[data-theme="dark"] {
-    --paper: #131B20; --surface: #19242A; --panel: #213039; --ink: #E4EAED; --muted: #9DABB4;
-    --rule: #2E3E47; --accent: #5CC3CA; --accent-ink: #0E1A1E; --accent-soft: #1D3A3E;
-    --warn: #F28B82; --warn-soft: #3F2624; color-scheme: dark;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 1.125rem; line-height: 1.6; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-feature-settings: "tnum" 0;
+  }
   a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
   a:hover { color: var(--accent); }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
-  svg { max-width: 100%; }
-  p { margin: 0 0 1em; }
-  h1, h2, h3 { font-family: var(--cond); font-weight: 600; line-height: 1.08; margin: 0; }
-  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; }
-  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  img, svg { max-width: 100%; }
 
-  /* ---------- navigation ---------- */
-  .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 86%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s; }
-  .nav.scrolled { border-bottom-color: var(--rule); }
-  .nav .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
-  .brand { font-family: var(--cond); font-weight: 600; font-size: 1.35rem; text-decoration: none; margin-right: auto; white-space: nowrap; }
-  .nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
-  .nav ul a { display: block; padding: 6px 12px; border-radius: 999px; text-decoration: none; font-weight: 500; font-size: 1rem; color: var(--muted); }
-  .nav ul a:hover { color: var(--ink); background: var(--panel); }
-  .nav ul a[aria-current="true"] { color: var(--accent-ink); background: var(--accent); }
-  .theme-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); display: grid; place-items: center; cursor: pointer; flex: none; }
-  .theme-btn:hover { border-color: var(--accent); }
-  .theme-btn svg { width: 20px; height: 20px; }
-  .theme-btn .moon { display: none; }
-  :root[data-theme="dark"] .theme-btn .sun { display: none; }
-  :root[data-theme="dark"] .theme-btn .moon { display: block; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .theme-btn .sun { display: none; }
-    :root:not([data-theme="light"]) .theme-btn .moon { display: block; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+  section { padding: 56px 0; border-top: 1px solid var(--rule); }
+
+  h1, h2, h3 { font-family: var(--cond); font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: 0.005em; }
+  h2 { font-size: clamp(1.75rem, 3.4vw, 2.25rem); margin-bottom: 12px; }
+  h3 { font-size: 1.45rem; }
+  p { margin: 0 0 1em; max-width: 68ch; }
+
+  /* ---------- masthead ---------- */
+  .masthead { padding: 64px 0 48px; }
+  .masthead h1 {
+    font-size: clamp(3rem, 8vw, 5.4rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    margin-bottom: 20px;
   }
+  .masthead-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .lede { font-size: 1.15rem; line-height: 1.55; max-width: 60ch; color: var(--ink); }
+  .where { color: var(--muted); margin: 0; }
+  .hero-skills { background: var(--panel); border-radius: 6px; padding: 22px 24px 18px; margin-top: 6px; }
+  .hero-skills h2 { font-size: 1.6rem; margin-bottom: 10px; }
+  .tools { margin: 0 0 16px; }
+  .tools div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--rule); }
+  .tools dt { font-weight: 600; }
+  .tools dd { margin: 0; color: var(--muted); }
+  .soft { list-style: none; margin: 0; padding: 0; }
+  .soft li { position: relative; padding: 3px 0 3px 18px; font-size: 0.98rem; }
+  .soft li::before { content: ""; position: absolute; left: 2px; top: 0.85em; width: 8px; height: 2px; background: var(--accent); }
+  .bullets { margin: 0; padding-left: 1.2em; max-width: 72ch; list-style: disc; }
+  .bullets li { margin-bottom: 8px; }
+  .bullets li::marker { color: var(--accent); }
+  .contact { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 28px 0 0; padding: 0; list-style: none; font-weight: 500; }
+  .contact a { text-decoration-line: underline; }
 
-  /* ---------- hero ---------- */
-  .hero { padding: 56px 0 40px; }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 48px; align-items: start; }
-  .hero h1 { font-size: clamp(3.4rem, 8.4vw, 6.4rem); font-weight: 700; letter-spacing: -0.015em; line-height: 0.92; }
-  .role { font-family: var(--cond); font-size: clamp(1.5rem, 2.6vw, 1.9rem); font-weight: 500; color: var(--accent); margin: 14px 0 22px; }
-  .summary { font-size: 1.2rem; line-height: 1.62; max-width: 58ch; }
-  .where { color: var(--muted); font-size: 1.02rem; display: flex; align-items: center; gap: 8px; margin: 0 0 26px; }
-  .where svg { width: 18px; height: 18px; flex: none; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 10px 20px; border-radius: 8px; font: 600 1.02rem var(--sans); text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer; }
-  .btn svg { width: 18px; height: 18px; }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-  .btn.primary:hover { filter: brightness(1.08); color: var(--accent-ink); }
-  .copy-status { font-size: 0.95rem; color: var(--accent); font-weight: 600; min-width: 5em; }
-
-  .trace-line { display: block; width: 100%; height: 46px; margin-top: 36px; }
-  .trace-line path { fill: none; stroke: var(--accent); stroke-width: 2; opacity: .55; }
-  @media (prefers-reduced-motion: no-preference) {
-    .trace-line path { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: draw 2.4s .2s cubic-bezier(.3,.6,.2,1) forwards; }
+  /* ---------- swing curve demo ---------- */
+  .demo-intro { margin-bottom: 28px; }
+  .demo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-areas: "plot oneline" "plot control";
+    grid-template-rows: auto 1fr;
+    gap: 22px 28px;
+    align-items: start;
   }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-
-  /* skills panel */
-  .skills-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 26px 26px 22px; }
-  .skills-card h2 { font-size: 1.7rem; margin-bottom: 4px; }
-  .skills-card .hint { color: var(--muted); font-size: 0.95rem; margin-bottom: 18px; }
-  .tools { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 14px; }
-  .tool-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .tool-name { font-weight: 600; }
-  .tool-level { font-size: 0.92rem; color: var(--muted); }
-  .meter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 6px; }
-  .meter i { height: 7px; border-radius: 4px; background: var(--panel); }
-  .meter i.on { background: var(--accent); }
-  .also-title { font-weight: 600; font-size: 0.98rem; margin: 0 0 10px; padding-top: 16px; border-top: 1px solid var(--rule); }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-  .chips li { background: var(--accent-soft); color: var(--ink); border-radius: 999px; padding: 4px 12px; font-size: 0.93rem; font-weight: 500; }
-
-  /* ---------- sections ---------- */
-  section.block { padding: 88px 0 24px; }
-  .section-head { max-width: 62ch; margin-bottom: 36px; }
-  .section-head h2 { font-size: clamp(2.3rem, 4.6vw, 3.1rem); margin-bottom: 10px; }
-  .section-head p { color: var(--muted); font-size: 1.12rem; margin: 0; }
-
-  /* ---------- projects ---------- */
-  .project { background: var(--surface); border: 1px solid var(--rule); border-radius: 18px; padding: 40px; margin-bottom: 28px; }
-  .project-top { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px; align-items: start; }
-  .project h3 { font-size: clamp(1.8rem, 3.2vw, 2.3rem); margin-bottom: 12px; }
-  .project .facts { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 1rem; margin-bottom: 18px; }
-  .project .facts span { display: inline-flex; align-items: center; gap: 7px; }
-  .project .facts svg { width: 17px; height: 17px; }
-  .project .lead { font-size: 1.14rem; }
-  .ticks { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 12px; }
-  .ticks li { position: relative; padding-left: 28px; }
-  .ticks li::before { content: ""; position: absolute; left: 2px; top: 0.62em; width: 12px; height: 2px; background: var(--accent); }
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-  .tags li { border: 1px solid var(--rule); border-radius: 6px; padding: 3px 10px; font-size: 0.9rem; color: var(--muted); font-weight: 500; }
-  .code-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; margin-top: 20px; }
-  .code-link svg { width: 18px; height: 18px; }
-  .featured { border-color: var(--accent); border-width: 1.5px; }
-  .badge { display: inline-block; background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 0.88rem; border-radius: 6px; padding: 3px 10px; margin-bottom: 14px; }
-
-  .art { background: var(--panel); border-radius: 12px; padding: 22px; margin: 0; }
-  .art svg { display: block; width: 100%; height: auto; }
-  .art .wire { stroke: var(--ink); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-  .art .fill { fill: var(--ink); }
-  .art .heat { stroke: var(--warn); stroke-width: 2.5; fill: none; stroke-linecap: round; }
-  .art text { fill: var(--muted); font: 600 15px var(--sans); }
-  .art figcaption { color: var(--muted); font-size: 0.93rem; margin-top: 10px; }
-
-  /* demo panel */
-  .demo { margin-top: 34px; padding-top: 30px; border-top: 1px dashed var(--rule); }
-  .demo h4 { font-family: var(--cond); font-size: 1.55rem; font-weight: 600; margin: 0 0 6px; }
-  .demo .intro { color: var(--muted); max-width: 70ch; margin-bottom: 22px; }
-  .demo-grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); grid-template-areas: "plot aside" "plot controls"; grid-template-rows: auto 1fr; gap: 20px 28px; align-items: start; }
-  .demo-plot { grid-area: plot; background: var(--panel); border-radius: 12px; padding: 16px 12px 8px; margin: 0; }
-  .demo-plot svg { display: block; width: 100%; height: auto; }
-  .demo-aside { grid-area: aside; margin: 0; }
-  .demo-controls { grid-area: controls; }
-  .model-note { color: var(--muted); font-size: 0.93rem; margin: 18px 0 0; max-width: 80ch; }
-
-  .gridline { stroke: var(--rule); stroke-width: 1; }
+  .plot { grid-area: plot; }
+  .oneline { grid-area: oneline; }
+  .control { grid-area: control; }
+  .plot {
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 16px 12px 8px;
+    margin: 0;
+  }
+  .plot svg { display: block; width: 100%; height: auto; }
+    .gridline { stroke: var(--rule); stroke-width: 1; }
   .limit { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 4; }
+  .fault-band { fill: var(--warn); opacity: 0.09; }
   .clearing { stroke: var(--ink); stroke-width: 1.25; stroke-dasharray: 2 3; }
-  .fault-band { fill: var(--warn); opacity: 0.1; }
   .trace { fill: none; stroke: var(--accent); stroke-width: 2.75; stroke-linejoin: round; stroke-linecap: round; }
   .trace.lost { stroke: var(--warn); }
   .label { fill: var(--ink); font: 500 13px var(--sans); }
   .label.muted { fill: var(--muted); }
 
-  .oneline svg { display: block; width: 100%; max-width: 340px; height: auto; }
-  .oneline .wire, .pf .wire { stroke: var(--ink); stroke-width: 2; fill: none; }
-  .oneline .busbar, .pf .busbar { stroke: var(--ink); stroke-width: 6; stroke-linecap: square; }
-  .oneline .breaker { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+  .oneline { margin: 0; }
+  .oneline svg { display: block; width: 100%; height: auto; }
+  .oneline .wire { stroke: var(--ink); stroke-width: 2; fill: none; }
+  .oneline .busbar { stroke: var(--ink); stroke-width: 5; stroke-linecap: square; }
+  .oneline .breaker { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
   .oneline .fault { fill: none; stroke: var(--warn); stroke-width: 2.25; stroke-linejoin: round; }
   .oneline text { fill: var(--muted); font: 500 12px var(--sans); }
-  .oneline figcaption { font-size: 0.92rem; color: var(--muted); margin-top: 6px; }
+  .oneline figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
 
-  .control { margin-bottom: 18px; }
-  .control label { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; margin-bottom: 2px; }
-  .control output { font-family: var(--cond); font-size: 1.9rem; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .control output small { font-family: var(--sans); font-size: 0.95rem; color: var(--muted); font-weight: 500; margin-left: 3px; }
-  input[type="range"] { width: 100%; margin: 6px 0 2px; accent-color: var(--accent); height: 28px; cursor: pointer; }
+  .control label { display: block; font-weight: 600; margin-bottom: 6px; }
+  .control .value { font-family: var(--cond); font-size: 2.4rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+  .control .unit { font-size: 1.1rem; color: var(--muted); margin-left: 4px; }
+  input[type="range"] { width: 100%; margin: 14px 0 4px; accent-color: var(--accent); height: 28px; }
   .scale { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .verdict { margin: 6px 0 0; padding: 10px 14px; border-radius: 8px; background: var(--accent-soft); font-weight: 500; }
-  .verdict.bad { background: var(--warn-soft); }
-  .subnote { font-size: 0.95rem; color: var(--muted); margin: 10px 0 0; }
+  .verdict { margin-top: 14px; padding-left: 12px; border-left: 3px solid var(--accent); font-weight: 500; min-height: 3.1em; }
+  .verdict.lost { border-left-color: var(--warn); }
+  .cct { font-size: 0.95rem; color: var(--muted); margin: 8px 0 0; }
+  .model-note { font-size: 0.92rem; color: var(--muted); margin-top: 22px; max-width: 80ch; }
 
-  /* pipeline stepper */
-  .stepper { margin-top: 30px; }
-  .stepper h4 { font-family: var(--cond); font-size: 1.55rem; font-weight: 600; margin: 0 0 14px; }
-  .steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; padding: 0; list-style: none; }
-  .steps button { font: 500 0.98rem var(--sans); color: var(--ink); background: var(--panel); border: 1.5px solid transparent; border-radius: 8px; padding: 8px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-  .steps button b { font-family: var(--cond); font-weight: 700; color: var(--accent); font-size: 1.05rem; }
-  .steps button:hover { border-color: var(--rule); }
-  .steps button[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); }
-  .steps button[aria-selected="true"] b { color: var(--accent-ink); }
-  .step-panel { background: var(--panel); border-radius: 10px; padding: 18px 20px; min-height: 5.4em; max-width: 80ch; }
-  .step-panel p { margin: 0; }
-  .step-nav { display: flex; gap: 10px; margin-top: 12px; }
-  .step-nav button { font: 600 0.95rem var(--sans); background: none; border: 1.5px solid var(--rule); color: var(--ink); border-radius: 8px; padding: 6px 14px; cursor: pointer; }
-  .step-nav button:hover { border-color: var(--accent); color: var(--accent); }
-  .step-nav button:disabled { opacity: .45; cursor: default; border-color: var(--rule); color: var(--muted); }
+  /* ---------- projects ---------- */
+  .project { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 8px 40px; padding: 32px 0; border-bottom: 1px solid var(--rule); }
+  .project:last-of-type { border-bottom: 0; }
+  .project .meta { color: var(--muted); font-size: 0.95rem; }
+  .project .meta strong { display: block; color: var(--ink); font-weight: 600; }
+  .project h3 { margin-bottom: 10px; }
+  .project .code-link { font-weight: 600; }
 
-  /* power flow demo */
-  .pf text { font: 500 13px var(--sans); fill: var(--muted); }
-  .pf .bus-name { fill: var(--ink); font-weight: 700; font-size: 14px; }
-  .pf .volt { font-weight: 600; font-size: 14px; fill: var(--ink); }
-  .pf .volt.low { fill: var(--warn); }
-  .pf .flow-label { font-weight: 600; font-size: 14px; fill: var(--ink); }
-  .pf .line-base { stroke: var(--rule); stroke-linecap: round; }
-  .pf .line-flow { stroke: var(--accent); stroke-linecap: butt; fill: none; stroke-dasharray: 10 8; }
-  .pf .arrow { fill: var(--accent); }
-  .pf .load { stroke: var(--ink); stroke-width: 2; fill: none; }
-  .pf .load-head { fill: var(--ink); }
-  .pf.collapsed .line-flow, .pf.collapsed .arrow { opacity: 0; }
-  @media (prefers-reduced-motion: no-preference) {
-    .pf .line-flow { animation: flow linear infinite; }
+  .pipeline { list-style: none; padding: 0; margin: 18px 0 20px; display: flex; flex-wrap: wrap; gap: 8px 0; counter-reset: step; max-width: 68ch; }
+  .pipeline li {
+    counter-increment: step;
+    position: relative;
+    padding: 8px 14px 8px 12px;
+    margin-right: 8px;
+    background: var(--panel);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 500;
   }
-  @keyframes flow { to { stroke-dashoffset: -18; } }
-  .readouts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0 0; }
-  .readouts div { background: var(--panel); border-radius: 8px; padding: 8px 12px; }
-  .readouts dt { font-size: 0.85rem; color: var(--muted); }
-  .readouts dd { margin: 0; font-family: var(--cond); font-size: 1.45rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pipeline li::before { content: counter(step); color: var(--accent); font-family: var(--cond); font-weight: 600; margin-right: 8px; }
 
-  .other { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-  .other article { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 22px 24px; }
-  .other h3 { font-size: 1.45rem; margin-bottom: 6px; }
-  .other .lang { color: var(--accent); font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; display: block; }
-  .other p { color: var(--muted); font-size: 1rem; margin: 0; }
-  .other-title { font-size: 1.8rem; margin: 48px 0 18px; }
+  .minor { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 8px; }
+  .minor h4 { font-family: var(--sans); font-size: 1.05rem; font-weight: 600; margin: 0 0 6px; }
+  .minor p { font-size: 0.97rem; color: var(--muted); margin: 0; }
 
-  /* ---------- experience timeline ---------- */
-  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
-  .timeline > li:not(:last-child)::after { content: ""; position: absolute; left: 7px; top: 22px; bottom: 0; width: 2px; background: var(--rule); }
-  .timeline > li { position: relative; padding: 0 0 44px 44px; }
-  .timeline > li:last-child { padding-bottom: 0; }
-  .timeline > li::before { content: ""; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--paper); border: 3px solid var(--accent); }
-  .timeline .when { font-size: 0.98rem; color: var(--muted); font-weight: 500; }
-  .timeline h3 { font-size: 1.75rem; margin: 2px 0 2px; }
-  .timeline .role-line { font-style: italic; color: var(--muted); margin-bottom: 12px; }
-  .timeline .ticks { max-width: 78ch; margin-bottom: 0; }
+  /* ---------- background ---------- */
+  .two-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
+  .entries { list-style: none; margin: 16px 0 0; padding: 0; }
+  .entries li { padding: 14px 0; border-top: 1px solid var(--rule); }
+  .entries li:first-child { border-top: 0; padding-top: 4px; }
+  .entries time, .entries .when { display: block; font-size: 0.92rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .entries .what { font-weight: 600; display: block; }
+  .entries p { margin: 4px 0 0; font-size: 0.98rem; }
+  .entries .bullets { margin-top: 8px; font-size: 0.98rem; }
+  .entries .bullets li, .entries .bullets li:first-child { border-top: 0; padding: 0; margin-bottom: 6px; }
+  h3.sub { font-size: 1.3rem; margin-top: 36px; }
 
-  /* ---------- education ---------- */
-  .edu-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
-  .edu-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 28px; }
-  .edu-card h3 { font-size: 1.75rem; margin-bottom: 4px; }
-  .edu-card .when { color: var(--muted); font-weight: 500; margin-bottom: 14px; display: block; }
-  .focus { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 12px 0 0; padding: 0; }
-  .focus li { background: var(--accent-soft); border-radius: 999px; padding: 4px 12px; font-size: 0.93rem; font-weight: 500; }
-  .courses { list-style: none; margin: 0; padding: 0; }
-  .courses li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 14px; padding: 12px 0; border-top: 1px solid var(--rule); }
-  .courses li:first-child { border-top: 0; padding-top: 0; }
-  .courses time { color: var(--muted); font-size: 0.95rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
-  .courses b { font-weight: 600; display: block; }
-  .courses span { color: var(--muted); font-size: 0.95rem; }
+  .skills { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 10px 32px; margin: 16px 0 0; }
+  .skills dt { font-weight: 600; }
+  .skills dd { margin: 0; color: var(--ink); }
 
-  /* ---------- contact + footer ---------- */
-  .contact-box { background: var(--accent); color: var(--accent-ink); border-radius: 18px; padding: 44px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: center; }
-  .contact-box h2 { font-size: clamp(2.2rem, 4.4vw, 3rem); margin-bottom: 10px; }
-  .contact-box p { margin: 0; font-size: 1.15rem; max-width: 46ch; }
-  .contact-links { display: grid; gap: 12px; }
-  .contact-links a, .contact-links button { font: 600 1.05rem var(--sans); border: 0; width: 100%; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 10px; background: color-mix(in srgb, var(--accent-ink) 12%, transparent); text-decoration: none; font-weight: 600; color: var(--accent-ink); overflow-wrap: anywhere; }
-  .contact-links a:hover, .contact-links button:hover { background: color-mix(in srgb, var(--accent-ink) 22%, transparent); color: var(--accent-ink); }
-  .contact-links svg { width: 20px; height: 20px; flex: none; }
-
-  footer { padding: 56px 0 64px; }
-  .titleblock { display: grid; grid-template-columns: 1.3fr 1.2fr 1fr 0.7fr; border: 1.5px solid var(--ink); }
+  /* ---------- title block footer ---------- */
+  footer { padding: 40px 0 56px; border-top: 1px solid var(--rule); }
+  .titleblock { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.4fr 0.8fr; border: 1.5px solid var(--ink); }
   .titleblock div { padding: 10px 14px; border-left: 1px solid var(--ink); }
   .titleblock div:first-child { border-left: 0; }
-  .titleblock span { display: block; font-size: 0.8rem; color: var(--muted); }
-  .titleblock b { font-weight: 600; font-size: 1rem; }
+  .titleblock span { display: block; font-size: 0.78rem; color: var(--muted); }
+  .titleblock b { font-weight: 600; font-size: 0.98rem; overflow-wrap: anywhere; }
 
-  /* ---------- responsive ---------- */
-  @media (max-width: 960px) {
-    .hero-grid, .project-top, .edu-grid, .contact-box { grid-template-columns: 1fr; }
-    .hero-grid { gap: 36px; }
-    .demo-grid { grid-template-columns: 1fr; grid-template-areas: "aside" "plot" "controls"; grid-template-rows: auto; }
-    .other { grid-template-columns: 1fr; }
-    .pf-grid { grid-template-areas: "plot" "aside" "controls"; }
-  }
-  @media (max-width: 720px) {
-    .nav ul { display: none; }
-    .wrap { padding: 0 18px; }
-    .project { padding: 26px 20px; border-radius: 14px; }
-    .contact-box { padding: 30px 22px; }
-    section.block { padding-top: 64px; }
+  @media (max-width: 860px) {
+    .masthead-grid { grid-template-columns: 1fr; gap: 32px; }
+    .demo-grid { grid-template-columns: 1fr; grid-template-areas: "oneline" "plot" "control"; grid-template-rows: auto; }
+    .oneline svg { max-width: 320px; }
+    .project { grid-template-columns: 1fr; }
+    .minor { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; gap: 24px; }
     .titleblock { grid-template-columns: 1fr 1fr; }
-    .titleblock div { border-top: 1px solid var(--ink); }
+    .titleblock div { border-left: 0; border-top: 1px solid var(--ink); }
     .titleblock div:nth-child(-n+2) { border-top: 0; }
-    .titleblock div:nth-child(odd) { border-left: 0; }
-    .courses li { grid-template-columns: 1fr; gap: 2px; }
-    .readouts { grid-template-columns: 1fr 1fr; }
-    .pf text, .pf .bus-name, .pf .volt, .pf .flow-label { font-size: 19px; }
+    .titleblock div:nth-child(even) { border-left: 1px solid var(--ink); }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 18px; }
+    section { padding: 44px 0; }
+    .skills { grid-template-columns: 1fr; gap: 2px; }
+    .skills dd { margin-bottom: 10px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .trace.draw { animation: draw 1.6s ease-out forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
   }
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
-  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
-  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-lab" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5.5 9.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-</svg>
-
-<nav class="nav" id="nav" aria-label="Sections">
-  <div class="wrap">
-    <a class="brand" href="#top">Farjan Rondón</a>
-    <ul>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
+<header class="masthead">
+  <div class="wrap masthead-grid">
+    <div>
+    <h1>Farjan Rondón</h1>
+    <p class="lede">Detail-oriented Electrical Engineer with a strong foundation in power systems, high-voltage infrastructure, and transmission line design. Skilled in utilizing AutoCAD for technical drafting, alongside hands-on expertise in technical simulations, extensive data processing, and infrastructure monitoring. Highly adaptable and quick to learn, with a strong focus on delivering practical, high-quality engineering solutions.</p>
+    <p class="where">Caracas, Venezuela. Open to remote work.</p>
+    <ul class="contact">
+      <li><a href="https://github.com/farjanrondon">GitHub</a></li>
+      <li><a href="mailto:farjan.santos@gmail.com">farjan.santos@gmail.com</a></li>
+      <!-- Upload your CV to this repository with exactly this file name -->
+      <li><a href="CV_Farjan_Rondon.pdf">Download CV (PDF)</a></li>
     </ul>
-    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark theme">
-      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-    </button>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <h1>Farjan Rondón</h1>
-        <p class="role">Electrical Engineer</p>
-        <p class="summary">Detail-oriented Electrical Engineer with a strong foundation in power systems, high-voltage infrastructure, and transmission line design. Skilled in utilizing AutoCAD for technical drafting, alongside hands-on expertise in technical simulations, extensive data processing, and infrastructure monitoring. Highly adaptable and quick to learn, with a strong focus on delivering practical, high-quality engineering solutions.</p>
-        <p class="where"><svg aria-hidden="true"><use href="#i-pin"/></svg>Caracas, Venezuela. Open to remote work.</p>
-        <div class="actions">
-          <!-- Upload the CV to this repository with exactly this file name -->
-          <a class="btn primary" href="CV_Farjan_Rondon.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg>Download CV</a>
-          <a class="btn" href="mailto:farjan.santos@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
-          <a class="btn" href="https://github.com/farjanrondon"><svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub</a>
-        </div>
-      </div>
-
-      <aside class="skills-card" aria-labelledby="skills-title">
-        <h2 id="skills-title">Skills</h2>
-        <p class="hint">Engineering software I work with</p>
-        <ul class="tools">
-          <li><div class="tool-row"><span class="tool-name">PLECS</span><span class="tool-level">Advanced</span></div><div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></div></li>
-          <li><div class="tool-row"><span class="tool-name">ETAP</span><span class="tool-level">Intermediate</span></div><div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></div></li>
-          <li><div class="tool-row"><span class="tool-name">AutoCAD</span><span class="tool-level">Intermediate</span></div><div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></div></li>
-          <li><div class="tool-row"><span class="tool-name">Microsoft Excel</span><span class="tool-level">Intermediate</span></div><div class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></div></li>
-          <li><div class="tool-row"><span class="tool-name">DIgSILENT PowerFactory</span><span class="tool-level">Basic</span></div><div class="meter" aria-hidden="true"><i class="on"></i><i></i><i></i></div></li>
-        </ul>
-        <p class="also-title">Also</p>
-        <ul class="chips">
-          <li>Programming (Python, MATLAB)</li>
-          <li>Technical and analytical computations</li>
-          <li>Logical thinking</li>
-          <li>Conversational English</li>
-          <li>Responsible and collaborative team player</li>
-        </ul>
-      </aside>
     </div>
-    <svg class="trace-line" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true"><path id="heroWave" d=""/></svg>
+
+    <aside class="hero-skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <dl class="tools">
+        <div><dt>PLECS</dt><dd>Advanced</dd></div>
+        <div><dt>ETAP</dt><dd>Intermediate</dd></div>
+        <div><dt>AutoCAD</dt><dd>Intermediate</dd></div>
+        <div><dt>Microsoft Excel</dt><dd>Intermediate</dd></div>
+        <div><dt>DIgSILENT PowerFactory</dt><dd>Basic</dd></div>
+      </dl>
+      <ul class="soft">
+        <li>Logical thinking and programming skills</li>
+        <li>Technical and analytical computations</li>
+        <li>Conversational English</li>
+        <li>Responsible and collaborative team player</li>
+      </ul>
+    </aside>
   </div>
 </header>
 
 <main>
-  <!-- ================= PROJECTS ================= -->
-  <section class="block" id="projects" aria-labelledby="projects-title">
+  <section id="stability" aria-labelledby="stability-title">
     <div class="wrap">
-      <div class="section-head">
-        <h2 id="projects-title">Projects</h2>
-        <p>From the power electronics lab to power system software. The two code projects include small demos you can try right here.</p>
+      <div class="demo-intro">
+        <h2 id="stability-title">How fast does a fault need to be cleared?</h2>
+        <p>A generator feeds the grid through two parallel lines, and a three-phase fault hits one of them. Move the clearing time and watch the rotor angle: clear the fault quickly and the machine swings back; wait too long and it loses synchronism.</p>
       </div>
 
-      <!-- Capstone -->
-      <article class="project featured">
-        <div class="project-top">
-          <div>
-            <span class="badge">Capstone project</span>
-            <h3>Study of real-time temperature estimation methods in IGBTs and power diodes</h3>
-            <div class="facts">
-              <span><svg aria-hidden="true"><use href="#i-cal"/></svg>Jan 2025 to Feb 2026</span>
-              <span><svg aria-hidden="true"><use href="#i-lab"/></svg>Universidad Simón Bolívar, Caracas</span>
-            </div>
-            <ul class="ticks">
-              <li>Bridged theoretical research with extensive practical execution, navigating complex laboratory environments to design and assemble advanced test setups and operate specialized measurement equipment.</li>
-              <li>Overcame technical limitations by independently designing, fabricating, and implementing a custom measurement circuit tailored to the project’s specific real-time data requirements.</li>
-              <li>Programmed custom scripts for the reading, processing, and visualization of extensive experimental datasets, ensuring accurate data interpretation and validation of theoretical models.</li>
-            </ul>
-            <ul class="tags" aria-label="Topics">
-              <li>Power electronics</li><li>Laboratory testing</li><li>Measurement circuits</li><li>Data processing</li>
-            </ul>
-          </div>
-          <figure class="art">
-            <svg viewBox="0 0 320 250" role="img" aria-labelledby="igbt-desc">
-              <desc id="igbt-desc">Schematic symbol of an IGBT with its anti-parallel power diode, with heat marks indicating device temperature.</desc>
-              <!-- collector and emitter rails -->
-              <path class="wire" d="M150 20 V70 M150 180 V230"/>
-              <!-- IGBT body -->
-              <path class="wire" d="M150 70 L128 92 M150 180 L128 158"/>
-              <path class="wire" d="M128 84 V166"/>
-              <path class="wire" d="M118 92 V158"/>
-              <path class="wire" d="M60 158 H118"/>
-              <path class="fill" d="M150 180 l-15 -3 l8 -9 z"/>
-              <!-- diode branch -->
-              <path class="wire" d="M150 40 H232 V100 M232 130 V210 H150"/>
-              <path class="fill" d="M214 150 h36 l-18 -30 z" transform="translate(0 -20)"/>
-              <path class="wire" d="M212 100 H252"/>
-              <!-- heat -->
-              <path class="heat" d="M80 70 q-8 -12 0 -24 t0 -24 M98 70 q-8 -12 0 -24 t0 -24"/>
-              <text x="160" y="22">C</text>
-              <text x="44" y="163">G</text>
-              <text x="160" y="240">E</text>
+      <div class="demo-grid">
+        <figure class="plot">
+          <svg id="swing" viewBox="0 0 640 380" role="img" aria-labelledby="swing-desc">
+            <desc id="swing-desc">Rotor angle in degrees versus time in seconds after the fault, for the selected clearing time.</desc>
+            <rect id="faultBand" class="fault-band" x="0" y="0" width="0" height="0"></rect>
+            <g id="grid"></g>
+            <line id="clearLine" class="clearing" x1="0" y1="20" x2="0" y2="330"></line>
+            <text id="clearLabel" class="label" x="0" y="14">fault cleared</text>
+            <polyline id="trace" class="trace" points=""></polyline>
+          </svg>
+        </figure>
+
+          <figure class="oneline">
+            <svg viewBox="0 0 300 150" aria-labelledby="oneline-desc" role="img">
+              <desc id="oneline-desc">One-line diagram: generator connected to a bus, two parallel lines to the grid, fault on the lower line with breakers at both ends.</desc>
+              <circle cx="28" cy="75" r="18" class="wire"></circle>
+              <path d="M18 75 q5 -9 10 0 t10 0" class="wire"></path>
+              <line x1="46" y1="75" x2="78" y2="75" class="wire"></line>
+              <line x1="78" y1="40" x2="78" y2="110" class="busbar"></line>
+              <line x1="78" y1="50" x2="232" y2="50" class="wire"></line>
+              <line x1="78" y1="100" x2="232" y2="100" class="wire"></line>
+              <rect x="94" y="93" width="14" height="14" class="breaker"></rect>
+              <rect x="202" y="93" width="14" height="14" class="breaker"></rect>
+              <path d="M126 76 l10 12 l-7 3 l10 12" class="fault"></path>
+              <line x1="232" y1="40" x2="232" y2="110" class="busbar"></line>
+              <line x1="232" y1="75" x2="258" y2="75" class="wire"></line>
+              <path d="M258 60 v30 M264 64 v22 M270 68 v14" class="wire"></path>
+              <text x="12" y="120">Generator</text>
+              <text x="140" y="42">Line 1</text>
+              <text x="140" y="126">Line 2</text>
+              <text x="248" y="120">Grid</text>
             </svg>
-            <figcaption>IGBT with its anti-parallel diode, the two devices studied.</figcaption>
+            <figcaption>The fault on line 2 is cleared by opening its two breakers.</figcaption>
           </figure>
-        </div>
-      </article>
 
-      <!-- MATLAB -->
-      <article class="project" id="stability-project">
-        <h3>Power flow and transient stability analysis</h3>
-        <div class="facts">
-          <span><svg aria-hidden="true"><use href="#i-code"/></svg>MATLAB</span>
-        </div>
-        <p class="lead" style="max-width:72ch">Solves the load flow of a power system with four methods, then checks whether the generators stay in synchronism after a line fault. The whole case lives in one Excel workbook, and the results go back to Excel.</p>
-
-        <div class="stepper">
-          <h4>How it works, step by step</h4>
-          <div class="steps" role="tablist" aria-label="Analysis steps" id="steps"></div>
-          <div class="step-panel" role="tabpanel" id="stepPanel" aria-live="polite"><p></p></div>
-          <div class="step-nav">
-            <button type="button" id="stepPrev">Previous step</button>
-            <button type="button" id="stepNext">Next step</button>
+          <div class="control">
+            <label for="tc">Fault clearing time</label>
+            <div><span class="value" id="tcValue">150</span><span class="unit">ms</span></div>
+            <input type="range" id="tc" min="40" max="400" step="5" value="150" aria-describedby="verdict">
+            <div class="scale"><span>40 ms</span><span>400 ms</span></div>
+            <p class="verdict" id="verdict" aria-live="polite"></p>
+            <p class="cct" id="cct"></p>
           </div>
-        </div>
-
-        <div class="demo">
-          <h4>Try it: how fast does a fault need to be cleared?</h4>
-          <p class="intro">A generator feeds the grid through two parallel lines, and a three-phase fault hits one of them. Move the clearing time and watch the rotor angle: clear the fault quickly and the machine swings back; wait too long and it loses synchronism.</p>
-          <div class="demo-grid">
-            <figure class="demo-plot">
-              <svg id="swing" viewBox="0 0 640 380" role="img" aria-labelledby="swing-desc">
-                <desc id="swing-desc">Rotor angle in degrees versus time in seconds after the fault, for the selected clearing time.</desc>
-                <rect id="faultBand" class="fault-band" x="0" y="0" width="0" height="0"></rect>
-                <g id="swingGrid"></g>
-                <line id="clearLine" class="clearing" x1="0" y1="0" x2="0" y2="0"></line>
-                <text id="clearLabel" class="label" x="0" y="0">fault cleared</text>
-                <polyline id="trace" class="trace" points=""></polyline>
-              </svg>
-            </figure>
-            <figure class="demo-aside oneline">
-              <svg viewBox="0 0 300 150" role="img" aria-labelledby="oneline-desc">
-                <desc id="oneline-desc">One-line diagram: generator connected to a bus, two parallel lines to the grid, fault on the lower line with breakers at both ends.</desc>
-                <circle cx="28" cy="75" r="18" class="wire"></circle>
-                <path d="M18 75 q5 -9 10 0 t10 0" class="wire"></path>
-                <line x1="46" y1="75" x2="78" y2="75" class="wire"></line>
-                <line x1="78" y1="40" x2="78" y2="110" class="busbar"></line>
-                <line x1="78" y1="50" x2="232" y2="50" class="wire"></line>
-                <line x1="78" y1="100" x2="232" y2="100" class="wire"></line>
-                <rect x="94" y="93" width="14" height="14" class="breaker"></rect>
-                <rect x="202" y="93" width="14" height="14" class="breaker"></rect>
-                <path d="M126 76 l10 12 l-7 3 l10 12" class="fault"></path>
-                <line x1="232" y1="40" x2="232" y2="110" class="busbar"></line>
-                <line x1="232" y1="75" x2="258" y2="75" class="wire"></line>
-                <path d="M258 60 v30 M264 64 v22 M270 68 v14" class="wire"></path>
-                <text x="8" y="122">Generator</text>
-                <text x="140" y="42">Line 1</text>
-                <text x="140" y="126">Line 2</text>
-                <text x="250" y="122">Grid</text>
-              </svg>
-              <figcaption>The fault on line 2 is cleared by opening its two breakers.</figcaption>
-            </figure>
-            <div class="demo-controls">
-              <div class="control">
-                <label for="tc">Fault clearing time <output id="tcOut" for="tc">150<small>ms</small></output></label>
-                <input type="range" id="tc" min="40" max="400" step="5" value="150" aria-describedby="verdict">
-                <div class="scale"><span>40 ms</span><span>400 ms</span></div>
-              </div>
-              <p class="verdict" id="verdict" aria-live="polite"></p>
-              <p class="subnote" id="cct"></p>
-            </div>
-          </div>
-          <p class="model-note">Classical single-machine model at 60 Hz: H = 5 s, mechanical power 1.0 pu, maximum electrical power 2.0 pu before the fault, 0.5 pu during it and 1.5 pu after line 2 is disconnected. The swing equation is integrated in your browser with fourth-order Runge-Kutta; the MATLAB tool does the same for multi-machine networks.</p>
-        </div>
-        <!-- Replace this link with the repository URL -->
-        <a class="code-link" href="https://github.com/farjanrondon"><svg aria-hidden="true"><use href="#i-gh"/></svg>See the code on GitHub</a>
-      </article>
-
-      <!-- Python -->
-      <article class="project" id="powerflow-project">
-        <h3>Power flow solver</h3>
-        <div class="facts">
-          <span><svg aria-hidden="true"><use href="#i-code"/></svg>Python, pandas, NumPy</span>
-        </div>
-        <p class="lead" style="max-width:72ch">The Python implementation of the load flow: Gauss-Seidel, Newton-Raphson, fast-decoupled and DC methods, with lines and off-nominal-tap transformers modeled as π-equivalents and voltage-dependent (ZIP) loads. Each run saves a copy of the input workbook with the results, so different cases can be compared side by side.</p>
-
-        <div class="demo">
-          <h4>Try it: load a three-bus network</h4>
-          <p class="intro">Bus 1 holds a generator at 1.02 pu; buses 2 and 3 are loads. Raise the loads and watch the line flows grow and the voltages sag. Push too far and the Newton-Raphson method finds no solution: the network can’t deliver that much power.</p>
-          <div class="demo-grid pf-grid">
-            <figure class="demo-plot">
-              <svg id="pfSvg" class="pf" viewBox="0 0 560 400" role="img" aria-labelledby="pf-desc">
-                <desc id="pf-desc">Three-bus network with line flows and bus voltages that update with the load sliders.</desc>
-                <g id="pfLines"></g>
-                <!-- generator at bus 1 -->
-                <circle cx="70" cy="70" r="20" class="wire"></circle>
-                <path d="M59 70 q5.5 -10 11 0 t11 0" class="wire"></path>
-                <line x1="90" y1="70" x2="112" y2="70" class="wire"></line>
-                <line x1="112" y1="38" x2="112" y2="102" class="busbar"></line>
-                <text class="bus-name" x="36" y="124">Bus 1</text>
-                <text class="volt" x="36" y="143">1.020 pu</text>
-                <!-- bus 2 -->
-                <line x1="468" y1="98" x2="468" y2="162" class="busbar"></line>
-                <path class="load" d="M468 130 H510 V160"></path>
-                <path class="load-head" d="M503 158 h14 l-7 12 z"></path>
-                <text class="bus-name" x="430" y="80">Bus 2</text>
-                <text class="volt" id="v2" x="486" y="80">1.000 pu</text>
-                <!-- bus 3 -->
-                <line x1="248" y1="330" x2="312" y2="330" class="busbar"></line>
-                <path class="load" d="M280 330 V360"></path>
-                <path class="load-head" d="M273 358 h14 l-7 12 z"></path>
-                <text class="bus-name" x="324" y="336">Bus 3</text>
-                <text class="volt" id="v3" x="324" y="355">1.000 pu</text>
-              </svg>
-            </figure>
-            <div class="demo-aside demo-controls-a">
-              <div class="control">
-                <label for="p2">Load at bus 2 <output id="p2Out" for="p2">150<small>MW</small></output></label>
-                <input type="range" id="p2" min="0" max="450" step="10" value="150">
-                <div class="scale"><span>0</span><span>450 MW</span></div>
-              </div>
-              <div class="control">
-                <label for="p3">Load at bus 3 <output id="p3Out" for="p3">100<small>MW</small></output></label>
-                <input type="range" id="p3" min="0" max="450" step="10" value="100">
-                <div class="scale"><span>0</span><span>450 MW</span></div>
-              </div>
-            </div>
-            <div class="demo-controls">
-              <p class="verdict" id="pfVerdict" aria-live="polite"></p>
-              <dl class="readouts">
-                <div><dt>Generation at bus 1</dt><dd id="pfGen">0 MW</dd></div>
-                <div><dt>Line losses</dt><dd id="pfLoss">0 MW</dd></div>
-              </dl>
-            </div>
-          </div>
-          <p class="model-note">100 MVA base, loads at 0.95 power factor, line impedances between 0.01 + j0.05 and 0.02 + j0.08 pu. Solved in your browser with Newton-Raphson, one of the four methods in the solver. Voltages below 0.95 pu are shown in red.</p>
-        </div>
-        <!-- Replace this link with the repository URL -->
-        <a class="code-link" href="https://github.com/farjanrondon"><svg aria-hidden="true"><use href="#i-gh"/></svg>See the code on GitHub</a>
-      </article>
-
-      <h3 class="other-title">Other code</h3>
-      <div class="other">
-        <article>
-          <h3>Nutri.Calc</h3>
-          <span class="lang">Python, Tkinter</span>
-          <p>Desktop app for nutrition consultations. It calculates body mass index, body-fat percentage, and protein and calorie targets, and exports each consultation to Excel.</p>
-        </article>
-        <article>
-          <h3>Lead database</h3>
-          <span class="lang">Python, SQLite</span>
-          <p>An exercise for storing and managing lead records in a SQLite database.</p>
-        </article>
-        <article>
-          <h3>CI-2125</h3>
-          <span class="lang">C++</span>
-          <p>Exercises from the Computación I course at Universidad Simón Bolívar.</p>
-        </article>
       </div>
+
+      <p class="model-note">Classical single-machine model at 60 Hz: H = 5 s, mechanical power 1.0 pu, maximum electrical power 2.0 pu before the fault, 0.5 pu during it and 1.5 pu after line 2 is disconnected. The swing equation is integrated in your browser with fourth-order Runge-Kutta. My MATLAB tool below runs the same kind of study on multi-machine networks.</p>
     </div>
   </section>
 
-  <!-- ================= EXPERIENCE ================= -->
-  <section class="block" id="experience" aria-labelledby="experience-title">
+  <section id="projects" aria-labelledby="projects-title">
     <div class="wrap">
-      <div class="section-head">
-        <h2 id="experience-title">Experience</h2>
-        <p>Infrastructure monitoring and software development, on site and remote.</p>
-      </div>
-      <ol class="timeline" reversed>
-        <li>
-          <span class="when">Oct 2025 to Jan 2026, Caracas, Venezuela</span>
-          <h3>Consorcio Credicard, C.A.</h3>
-          <p class="role-line">Monitoring Analyst</p>
-          <ul class="ticks">
-            <li>Supervised real-time platform operability via custom dashboards, proactively identifying and escalating system anomalies to relevant technical departments.</li>
-            <li>Maintained physical server integrity by routinely auditing cooling systems and electrical backup infrastructure, ensuring maximum uptime for physical payment processing servers.</li>
-          </ul>
-        </li>
-        <li>
-          <span class="when">Mar 2021 to May 2021, remote (Mexico)</span>
-          <h3>Universidad ISEP</h3>
-          <p class="role-line">Web Developer</p>
-          <ul class="ticks">
-            <li>Developed and implemented custom Odoo modules in Python to automate the capture, organization, and storage of data, significantly improving the efficiency of the lead management workflow.</li>
-            <li>Modernized outdated legacy systems to accommodate company scaling, rewriting code to maximize computing resource efficiency and integrate new functionalities.</li>
-            <li>Troubleshot and resolved system bugs and real-time contingencies, ensuring continuous platform stability and reliable operation.</li>
-            <li>Produced detailed technical documentation for module integrations and code updates, establishing clear guidelines to facilitate seamless future platform modifications.</li>
-          </ul>
-        </li>
-      </ol>
-    </div>
-  </section>
+      <h2 id="projects-title">Projects</h2>
 
-  <!-- ================= EDUCATION ================= -->
-  <section class="block" id="education" aria-labelledby="education-title">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="education-title">Education</h2>
-        <p>A degree centered on power systems, plus focused courses in high voltage, protection and power electronics.</p>
-      </div>
-      <div class="edu-grid">
-        <div class="edu-card">
-          <h3>Universidad Simón Bolívar (USB)</h3>
-          <span class="when">Electrical Engineering, 2018 to 2026, Caracas</span>
-          <p>Academic program focused on power systems, encompassing:</p>
-          <ul class="focus">
-            <li>Transmission line design</li>
-            <li>High-voltage engineering</li>
-            <li>Electrical protection systems</li>
-            <li>Energy conversion</li>
-            <li>Power electronics</li>
-          </ul>
-        </div>
-        <div class="edu-card">
-          <h3>Courses and certifications</h3>
-          <span class="when">Most recent first</span>
-          <ul class="courses">
-            <li><time datetime="2026-03">Mar 2026</time><div><b>Earthing Systems: Measurement Methods</b><span>Universidad Simón Bolívar</span></div></li>
-            <li><time datetime="2025-03">Mar 2025</time><div><b>Introduction to Power Electronic Converter Design</b><span>Universidad Simón Bolívar</span></div></li>
-            <li><time datetime="2025-03">Mar 2025</time><div><b>High-Voltage Installations and Insulation Studies</b><span>Universidad Simón Bolívar</span></div></li>
-            <li><time datetime="2025-03">Mar 2025</time><div><b>Motor and Critical Load Protection in Industry and Mining using ETAP</b><span>Greener Engineering School</span></div></li>
-            <li><time datetime="2021-01">Jan 2021</time><div><b>Data Analysis with Python</b><span>IBM</span></div></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= CONTACT ================= -->
-  <section class="block" id="contact" aria-labelledby="contact-title">
-    <div class="wrap">
-      <div class="contact-box">
+      <article class="project">
+        <div class="meta"><strong>Capstone project</strong>Jan 2025 to Feb 2026<br>Universidad Simón Bolívar</div>
         <div>
-          <h2 id="contact-title">Let’s talk</h2>
-          <p>I’m looking for remote roles in power systems and electrical engineering. Send me an email or download my CV.</p>
+          <h3>Study of real-time temperature estimation methods in IGBTs and power diodes</h3>
+          <ul class="bullets">
+            <li>Bridged theoretical research with extensive practical execution, navigating complex laboratory environments to design and assemble advanced test setups and operate specialized measurement equipment.</li>
+            <li>Overcame technical limitations by independently designing, fabricating, and implementing a custom measurement circuit tailored to the project’s specific real-time data requirements.</li>
+            <li>Programmed custom scripts for the reading, processing, and visualization of extensive experimental datasets, ensuring accurate data interpretation and validation of theoretical models.</li>
+          </ul>
         </div>
-        <div class="contact-links">
-          <a href="mailto:farjan.santos@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>farjan.santos@gmail.com</a>
-          <button type="button" id="copyEmail"><svg aria-hidden="true"><use href="#i-copy"/></svg><span id="copyText">Copy email address</span></button>
-          <a href="CV_Farjan_Rondon.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg>Download CV (PDF)</a>
-          <a href="https://github.com/farjanrondon"><svg aria-hidden="true"><use href="#i-gh"/></svg>github.com/farjanrondon</a>
+      </article>
+
+      <article class="project">
+        <div class="meta"><strong>MATLAB</strong>Power flow and stability</div>
+        <div>
+          <h3>Power flow and transient stability analysis</h3>
+          <p>Reads a complete case from an Excel workbook (buses, lines, transformers and shunt elements), builds the Y-bus and solves the load flow with four methods. The DC solution can be used as the starting point for the iterative ones. The method with the lowest error then feeds a transient stability study: the network is expanded with the generators’ internal buses, Kron-reduced for the pre-fault, fault and post-fault states, and the swing equation is integrated for a line fault and clearing time chosen by the user.</p>
+          <ol class="pipeline" aria-label="Steps in the analysis">
+            <li>Excel case file</li>
+            <li>Y-bus matrix</li>
+            <li>Gauss-Seidel, Newton-Raphson, fast-decoupled, DC</li>
+            <li>Lowest-error solution</li>
+            <li>Kron reduction</li>
+            <li>Swing equation with Heun or RK4</li>
+            <li>Results back to Excel</li>
+          </ol>
+          <p>For each method the output workbook holds bus voltages and angles, line flows and losses, and the system power balance.</p>
+          <!-- Replace this link with the repository URL -->
+          <a class="code-link" href="https://github.com/farjanrondon">See the code on GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="meta"><strong>Python</strong>pandas, NumPy</div>
+        <div>
+          <h3>Power flow solver</h3>
+          <p>The Python implementation of the load flow: Gauss-Seidel, Newton-Raphson, fast-decoupled and DC methods, with lines and off-nominal-tap transformers modeled as π-equivalents and loads modeled as ZIP (constant impedance, current and power). Each run saves a copy of the input workbook with the results, so different cases can be studied side by side.</p>
+          <!-- Replace this link with the repository URL -->
+          <a class="code-link" href="https://github.com/farjanrondon">See the code on GitHub</a>
+        </div>
+      </article>
+
+      <h3 class="sub">Other code</h3>
+      <div class="minor">
+        <div>
+          <h4>Nutri.Calc</h4>
+          <p>Desktop app in Python and Tkinter for nutrition consultations. It calculates body mass index, body-fat percentage, and protein and calorie targets, and exports each consultation to Excel.</p>
+        </div>
+        <div>
+          <h4>Lead database</h4>
+          <p>A Python and SQLite exercise for storing and managing lead records.</p>
+        </div>
+        <div>
+          <h4>CI-2125</h4>
+          <p>C++ exercises from the Computación I course at Universidad Simón Bolívar.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="background" aria-labelledby="background-title">
+    <div class="wrap">
+      <h2 id="background-title">Background</h2>
+      <div class="two-col">
+        <div>
+          <h3>Experience</h3>
+          <ul class="entries">
+            <li>
+              <span class="when">Oct 2025 to Jan 2026, Caracas, Venezuela</span>
+              <span class="what">Monitoring Analyst, Consorcio Credicard, C.A.</span>
+              <ul class="bullets">
+                <li>Supervised real-time platform operability via custom dashboards, proactively identifying and escalating system anomalies to relevant technical departments.</li>
+                <li>Maintained physical server integrity by routinely auditing cooling systems and electrical backup infrastructure, ensuring maximum uptime for physical payment processing servers.</li>
+              </ul>
+            </li>
+            <li>
+              <span class="when">Mar 2021 to May 2021, remote (Mexico)</span>
+              <span class="what">Web Developer, Universidad ISEP</span>
+              <ul class="bullets">
+                <li>Developed and implemented custom Odoo modules in Python to automate the capture, organization, and storage of data, significantly improving the efficiency of the lead management workflow.</li>
+                <li>Modernized outdated legacy systems to accommodate company scaling, rewriting code to maximize computing resource efficiency and integrate new functionalities.</li>
+                <li>Troubleshot and resolved system bugs and real-time contingencies, ensuring continuous platform stability and reliable operation.</li>
+                <li>Produced detailed technical documentation for module integrations and code updates, establishing clear guidelines to facilitate seamless future platform modifications.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>Education</h3>
+          <ul class="entries">
+            <li>
+              <span class="when">2018 to 2026</span>
+              <span class="what">Electrical Engineering, Universidad Simón Bolívar</span>
+              <p>Academic program focused on power systems, encompassing transmission line design, high-voltage engineering, electrical protection systems, energy conversion, and power electronics.</p>
+            </li>
+          </ul>
+          <h3 class="sub">Courses</h3>
+          <ul class="entries">
+            <li><span class="when">March 2026</span><span class="what">Earthing Systems: Measurement Methods, USB</span></li>
+            <li><span class="when">March 2025</span><span class="what">Introduction to Power Electronic Converter Design, USB</span></li>
+            <li><span class="when">March 2025</span><span class="what">High-Voltage Installations and Insulation Studies, USB</span></li>
+            <li><span class="when">March 2025</span><span class="what">Motor and Critical Load Protection in Industry and Mining using ETAP, Greener Engineering School</span></li>
+            <li><span class="when">January 2021</span><span class="what">Data Analysis with Python, IBM</span></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </section>
 </main>
@@ -665,8 +421,9 @@
   <div class="wrap">
     <div class="titleblock">
       <div><span>Engineer</span><b>Farjan Rondón</b></div>
-      <div><span>Discipline</span><b>Electrical engineering</b></div>
+      <div><span>Discipline</span><b>Electrical, power systems</b></div>
       <div><span>Location</span><b>Caracas, Venezuela</b></div>
+      <div><span>Contact</span><b><a href="mailto:farjan.santos@gmail.com">farjan.santos@gmail.com</a></b></div>
       <div><span>Revision</span><b>Sep 2026</b></div>
     </div>
   </div>
@@ -674,7 +431,52 @@
 
 <script>
 (function () {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Single machine, infinite bus, classical model
+  const f = 60, H = 5, Pm = 1.0;
+  const Pmax = { pre: 2.0, fault: 0.5, post: 1.5 };
+  const k = Math.PI * f / H;              // d2(delta)/dt2 = k * (Pm - Pe)
+  const d0 = Math.asin(Pm / Pmax.pre);    // pre-fault operating angle
+  const dt = 0.0005;
+  const T_PLOT = 2.5, T_SIM = 5.0;
+  const DEG = 180 / Math.PI;
+
+  function simulate(tc, tEnd, keepPoints) {
+    let d = d0, w = 0, t = 0, peak = d, lostAt = null;
+    const pts = keepPoints ? [[0, d]] : null;
+    const acc = (tt, dd) => k * (Pm - (tt < tc ? Pmax.fault : Pmax.post) * Math.sin(dd));
+    let n = 0;
+    while (t < tEnd - 1e-12) {
+      const k1d = w,                 k1w = acc(t, d);
+      const k2d = w + 0.5 * dt * k1w, k2w = acc(t + 0.5 * dt, d + 0.5 * dt * k1d);
+      const k3d = w + 0.5 * dt * k2w, k3w = acc(t + 0.5 * dt, d + 0.5 * dt * k2d);
+      const k4d = w + dt * k3w,       k4w = acc(t + dt, d + dt * k3d);
+      d += dt / 6 * (k1d + 2 * k2d + 2 * k3d + k4d);
+      w += dt / 6 * (k1w + 2 * k2w + 2 * k3w + k4w);
+      t += dt; n++;
+      if (d > peak) peak = d;
+      if (keepPoints && t <= T_PLOT + 1e-9 && n % 8 === 0 && d * DEG <= 205) pts.push([t, d]);
+      if (d > Math.PI) { lostAt = t; if (!keepPoints || t > T_PLOT || d * DEG > 205) break; }
+    }
+    return { pts, peak, lostAt };
+  }
+
+  // Critical clearing time by bisection
+  function criticalClearingTime() {
+    let lo = 0.01, hi = 1.0;
+    for (let i = 0; i < 30; i++) {
+      const mid = (lo + hi) / 2;
+      if (simulate(mid, T_SIM, false).lostAt === null) lo = mid; else hi = mid;
+    }
+    return lo;
+  }
+
+  // ----- chart -----
+  const svg = document.getElementById("swing");
+  const gridG = document.getElementById("grid");
+  const trace = document.getElementById("trace");
+  const clearLine = document.getElementById("clearLine");
+  const clearLabel = document.getElementById("clearLabel");
+  const faultBand = document.getElementById("faultBand");
   const NS = "http://www.w3.org/2000/svg";
   const el = (name, attrs, text) => {
     const e = document.createElementNS(NS, name);
@@ -682,354 +484,96 @@
     if (text !== undefined) e.textContent = text;
     return e;
   };
+  const yMax = 200;
+  let L = null; // current layout
 
-  /* ---------- theme toggle ---------- */
-  const root = document.documentElement;
-  document.getElementById("themeBtn").addEventListener("click", () => {
-    const current = root.getAttribute("data-theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    const next = current === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    try { localStorage.setItem("theme", next); } catch (e) {}
-  });
+  function buildAxes() {
+    const narrow = svg.parentElement.clientWidth < 520;
+    const W = narrow ? 400 : 640, Ht = narrow ? 330 : 380;
+    const M = narrow ? { l: 58, r: 12, t: 24, b: 48 } : { l: 70, r: 16, t: 24, b: 50 };
+    const X0 = M.l, X1 = W - M.r, Y0 = Ht - M.b, Y1 = M.t;
+    L = { W, Ht, X0, X1, Y0, Y1, narrow,
+          sx: t => X0 + (t / T_PLOT) * (X1 - X0),
+          sy: deg => Y0 - (deg / yMax) * (Y0 - Y1) };
+    svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
+    gridG.textContent = "";
+    for (let deg = 0; deg <= 180; deg += (narrow ? 60 : 30)) {
+      gridG.appendChild(el("line", { x1: X0, x2: X1, y1: L.sy(deg), y2: L.sy(deg), class: deg === 180 ? "limit" : "gridline" }));
+      gridG.appendChild(el("text", { x: X0 - 8, y: L.sy(deg) + 4, "text-anchor": "end", class: "label muted" }, deg + "°"));
+    }
+    for (let t = 0; t <= T_PLOT + 1e-9; t += (narrow ? 1.0 : 0.5)) {
+      gridG.appendChild(el("line", { x1: L.sx(t), x2: L.sx(t), y1: Y0, y2: Y0 + 6, class: "gridline" }));
+      gridG.appendChild(el("text", { x: L.sx(t), y: Y0 + 22, "text-anchor": "middle", class: "label muted" }, t.toFixed(1)));
+    }
+    gridG.appendChild(el("line", { x1: X0, x2: X1, y1: Y0, y2: Y0, class: "gridline" }));
+    gridG.appendChild(el("text", { x: (X0 + X1) / 2, y: Ht - 8, "text-anchor": "middle", class: "label muted" }, "Time after the fault (s)"));
+    gridG.appendChild(el("text", { x: 16, y: (Y0 + Y1) / 2, "text-anchor": "middle", class: "label muted", transform: `rotate(-90 16 ${(Y0 + Y1) / 2})` }, "Rotor angle"));
+    let clip = document.getElementById("plotArea");
+    if (!clip) {
+      clip = el("clipPath", { id: "plotArea" });
+      clip.appendChild(el("rect", {}));
+      svg.insertBefore(clip, svg.firstChild);
+      trace.setAttribute("clip-path", "url(#plotArea)");
+    }
+    const r = clip.firstChild;
+    r.setAttribute("x", X0); r.setAttribute("y", Y1 - 8);
+    r.setAttribute("width", X1 - X0 + 4); r.setAttribute("height", Y0 - Y1 + 8);
+  }
+  buildAxes();
 
-  /* ---------- nav: border on scroll + current section ---------- */
-  const nav = document.getElementById("nav");
-  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
-  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
-  const links = [...document.querySelectorAll('.nav ul a')];
-  if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if (en.isIntersecting) {
-          links.forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + en.target.id ? "true" : "false"));
-        }
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    document.querySelectorAll("main section[id]").forEach(s => io.observe(s));
+  const slider = document.getElementById("tc");
+  const tcValue = document.getElementById("tcValue");
+  const verdict = document.getElementById("verdict");
+  const cctEl = document.getElementById("cct");
+
+  const cct = criticalClearingTime();
+  cctEl.textContent = `Critical clearing time for this system: about ${Math.round(cct * 1000)} ms.`;
+
+  function render(animate) {
+    const tc = Number(slider.value) / 1000;
+    tcValue.textContent = slider.value;
+    const run = simulate(tc, T_SIM, true);
+    const lost = run.lostAt !== null;
+
+    trace.setAttribute("points", run.pts.map(p => `${L.sx(p[0]).toFixed(1)},${L.sy(p[1] * DEG).toFixed(1)}`).join(" "));
+    trace.classList.toggle("lost", lost);
+
+    const { X0, X1, Y0, Y1 } = L;
+    const x = L.sx(tc);
+    clearLine.setAttribute("x1", x); clearLine.setAttribute("x2", x);
+    clearLine.setAttribute("y1", Y1 - 4); clearLine.setAttribute("y2", Y0);
+    faultBand.setAttribute("x", X0); faultBand.setAttribute("y", Y1 - 4);
+    faultBand.setAttribute("width", Math.max(0, x - X0)); faultBand.setAttribute("height", Y0 - Y1 + 4);
+    const nearRight = x > X1 - 110;
+    clearLabel.setAttribute("x", nearRight ? x - 6 : x + 6);
+    clearLabel.setAttribute("text-anchor", nearRight ? "end" : "start");
+    clearLabel.setAttribute("y", Y1 + 10);
+
+    verdict.classList.toggle("lost", lost);
+    verdict.textContent = lost
+      ? `Unstable. The generator loses synchronism about ${run.lostAt.toFixed(2)} s after the fault.`
+      : `Stable. The rotor angle peaks at ${Math.round(run.peak * DEG)}° and swings back.`;
+
+    if (animate) {
+      const len = trace.getTotalLength();
+      trace.style.strokeDasharray = len;
+      trace.style.strokeDashoffset = len;
+      trace.classList.add("draw");
+    } else {
+      trace.classList.remove("draw");
+      trace.style.strokeDasharray = "";
+      trace.style.strokeDashoffset = "";
+    }
   }
 
-  /* ---------- hero trace ---------- */
-  (function () {
-    let d = "M0 23";
-    for (let x = 0; x <= 1200; x += 4) {
-      const env = 0.35 + 0.65 * Math.sin(Math.PI * x / 1200);
-      d += ` L${x} ${(23 - 16 * env * Math.sin(x / 1200 * Math.PI * 2 * 7)).toFixed(2)}`;
-    }
-    document.getElementById("heroWave").setAttribute("d", d);
-  })();
-
-  /* ---------- copy email ---------- */
-  const copyBtn = document.getElementById("copyEmail");
-  const copyText = document.getElementById("copyText");
-  copyBtn.addEventListener("click", async (ev) => {
-    ev.preventDefault();
-    try {
-      await navigator.clipboard.writeText("farjan.santos@gmail.com");
-      copyText.textContent = "Email address copied";
-    } catch (e) {
-      copyText.textContent = "farjan.santos@gmail.com";
-    }
-    setTimeout(() => { copyText.textContent = "Copy email address"; }, 2500);
+  slider.addEventListener("input", () => render(false));
+  let lastNarrow = null;
+  window.addEventListener("resize", () => {
+    const narrow = svg.parentElement.clientWidth < 520;
+    if (narrow !== lastNarrow) { lastNarrow = narrow; buildAxes(); render(false); }
   });
-
-  /* ---------- pipeline stepper ---------- */
-  const STEPS = [
-    ["Excel case file", "Buses, lines, transformers and shunt elements are read from the sheets of one workbook. A parameters sheet sets the tolerance, the maximum iterations and which methods to run."],
-    ["Y-bus matrix", "Lines and transformers with off-nominal taps become π-equivalent models. Together with the shunt elements they form the nodal admittance matrix of the network."],
-    ["Load flow", "Gauss-Seidel, Newton-Raphson and fast-decoupled methods solve the non-linear power flow equations with ZIP loads. The DC method gives a fast linear estimate, and its angles can seed the other methods."],
-    ["Best solution", "The method that converged with the smallest error is kept as the operating point before the fault."],
-    ["Kron reduction", "The generators’ internal buses and the load admittances are added to the network, which is then reduced to the generator nodes for the pre-fault, fault and post-fault conditions."],
-    ["Swing equation", "The rotor angles are integrated in time with Heun’s method or fourth-order Runge-Kutta, for the faulted line and clearing time the user chooses."],
-    ["Results", "Bus voltages, line flows and losses, the system power balance and the stability results are written to an output workbook."]
-  ];
-  const stepsEl = document.getElementById("steps");
-  const panel = document.getElementById("stepPanel").querySelector("p");
-  const prev = document.getElementById("stepPrev"), next = document.getElementById("stepNext");
-  let current = 0;
-  const buttons = STEPS.map((s, i) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.setAttribute("role", "tab"); b.id = "step-" + i;
-    b.setAttribute("aria-controls", "stepPanel");
-    b.innerHTML = `<b>${i + 1}</b>${s[0]}`;
-    b.addEventListener("click", () => select(i));
-    b.addEventListener("keydown", e => {
-      if (e.key === "ArrowRight") { select(Math.min(i + 1, STEPS.length - 1)); buttons[current].focus(); }
-      if (e.key === "ArrowLeft") { select(Math.max(i - 1, 0)); buttons[current].focus(); }
-    });
-    stepsEl.appendChild(b);
-    return b;
-  });
-  function select(i) {
-    current = i;
-    buttons.forEach((b, j) => { b.setAttribute("aria-selected", j === i ? "true" : "false"); b.tabIndex = j === i ? 0 : -1; });
-    document.getElementById("stepPanel").setAttribute("aria-labelledby", "step-" + i);
-    panel.textContent = STEPS[i][1];
-    prev.disabled = i === 0; next.disabled = i === STEPS.length - 1;
-  }
-  prev.addEventListener("click", () => select(Math.max(0, current - 1)));
-  next.addEventListener("click", () => select(Math.min(STEPS.length - 1, current + 1)));
-  select(0);
-
-  /* ---------- transient stability demo (single machine, infinite bus) ---------- */
-  (function () {
-    const f = 60, H = 5, Pm = 1.0;
-    const Pmax = { fault: 0.5, post: 1.5, pre: 2.0 };
-    const k = Math.PI * f / H;
-    const d0 = Math.asin(Pm / Pmax.pre);
-    const dt = 0.0005, T_PLOT = 2.5, T_SIM = 5.0, DEG = 180 / Math.PI, yMax = 200;
-
-    function simulate(tc, tEnd, keep) {
-      let d = d0, w = 0, t = 0, peak = d, lostAt = null, n = 0;
-      const pts = keep ? [[0, d]] : null;
-      const acc = (tt, dd) => k * (Pm - (tt < tc ? Pmax.fault : Pmax.post) * Math.sin(dd));
-      while (t < tEnd - 1e-12) {
-        const k1d = w, k1w = acc(t, d);
-        const k2d = w + 0.5 * dt * k1w, k2w = acc(t + 0.5 * dt, d + 0.5 * dt * k1d);
-        const k3d = w + 0.5 * dt * k2w, k3w = acc(t + 0.5 * dt, d + 0.5 * dt * k2d);
-        const k4d = w + dt * k3w, k4w = acc(t + dt, d + dt * k3d);
-        d += dt / 6 * (k1d + 2 * k2d + 2 * k3d + k4d);
-        w += dt / 6 * (k1w + 2 * k2w + 2 * k3w + k4w);
-        t += dt; n++;
-        if (d > peak) peak = d;
-        if (keep && t <= T_PLOT + 1e-9 && n % 8 === 0 && d * DEG <= 205) pts.push([t, d]);
-        if (d > Math.PI && lostAt === null) lostAt = t;
-        if (lostAt !== null && (!keep || t > T_PLOT || d * DEG > 205)) break;
-      }
-      return { pts, peak, lostAt };
-    }
-    let lo = 0.01, hi = 1.0;
-    for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (simulate(m, T_SIM, false).lostAt === null) lo = m; else hi = m; }
-    const cct = lo;
-
-    const svg = document.getElementById("swing");
-    const gridG = document.getElementById("swingGrid");
-    const trace = document.getElementById("trace");
-    const clearLine = document.getElementById("clearLine");
-    const clearLabel = document.getElementById("clearLabel");
-    const band = document.getElementById("faultBand");
-    let L;
-
-    function axes() {
-      const narrow = svg.parentElement.clientWidth < 520;
-      const W = narrow ? 400 : 640, Ht = narrow ? 330 : 380;
-      const M = narrow ? { l: 58, r: 12, t: 26, b: 48 } : { l: 70, r: 16, t: 26, b: 50 };
-      const X0 = M.l, X1 = W - M.r, Y0 = Ht - M.b, Y1 = M.t;
-      L = { narrow, X0, X1, Y0, Y1, sx: t => X0 + t / T_PLOT * (X1 - X0), sy: g => Y0 - g / yMax * (Y0 - Y1) };
-      svg.setAttribute("viewBox", `0 0 ${W} ${Ht}`);
-      gridG.textContent = "";
-      for (let g = 0; g <= 180; g += narrow ? 60 : 30) {
-        gridG.appendChild(el("line", { x1: X0, x2: X1, y1: L.sy(g), y2: L.sy(g), class: g === 180 ? "limit" : "gridline" }));
-        gridG.appendChild(el("text", { x: X0 - 8, y: L.sy(g) + 4, "text-anchor": "end", class: "label muted" }, g + "°"));
-      }
-      for (let t = 0; t <= T_PLOT + 1e-9; t += narrow ? 1 : 0.5) {
-        gridG.appendChild(el("line", { x1: L.sx(t), x2: L.sx(t), y1: Y0, y2: Y0 + 6, class: "gridline" }));
-        gridG.appendChild(el("text", { x: L.sx(t), y: Y0 + 22, "text-anchor": "middle", class: "label muted" }, t.toFixed(1)));
-      }
-      gridG.appendChild(el("line", { x1: X0, x2: X1, y1: Y0, y2: Y0, class: "gridline" }));
-      gridG.appendChild(el("text", { x: (X0 + X1) / 2, y: Ht - 8, "text-anchor": "middle", class: "label muted" }, "Time after the fault (s)"));
-      gridG.appendChild(el("text", { x: 16, y: (Y0 + Y1) / 2, "text-anchor": "middle", class: "label muted", transform: `rotate(-90 16 ${(Y0 + Y1) / 2})` }, "Rotor angle"));
-      let clip = document.getElementById("swingClip");
-      if (!clip) {
-        clip = el("clipPath", { id: "swingClip" }); clip.appendChild(el("rect", {}));
-        svg.insertBefore(clip, svg.firstChild); trace.setAttribute("clip-path", "url(#swingClip)");
-      }
-      const r = clip.firstChild;
-      r.setAttribute("x", X0); r.setAttribute("y", Y1 - 8); r.setAttribute("width", X1 - X0 + 4); r.setAttribute("height", Y0 - Y1 + 8);
-    }
-
-    const slider = document.getElementById("tc");
-    const out = document.getElementById("tcOut");
-    const verdict = document.getElementById("verdict");
-    document.getElementById("cct").textContent = `Critical clearing time for this system: about ${Math.round(cct * 1000)} ms.`;
-
-    function render(animate) {
-      const tc = Number(slider.value) / 1000;
-      out.innerHTML = `${slider.value}<small>ms</small>`;
-      const run = simulate(tc, T_SIM, true);
-      const lost = run.lostAt !== null;
-      trace.setAttribute("points", run.pts.map(p => `${L.sx(p[0]).toFixed(1)},${L.sy(p[1] * DEG).toFixed(1)}`).join(" "));
-      trace.classList.toggle("lost", lost);
-      const x = L.sx(tc);
-      clearLine.setAttribute("x1", x); clearLine.setAttribute("x2", x);
-      clearLine.setAttribute("y1", L.Y1 - 6); clearLine.setAttribute("y2", L.Y0);
-      band.setAttribute("x", L.X0); band.setAttribute("y", L.Y1 - 6);
-      band.setAttribute("width", Math.max(0, x - L.X0)); band.setAttribute("height", L.Y0 - L.Y1 + 6);
-      const nearRight = x > L.X1 - 110;
-      clearLabel.setAttribute("x", nearRight ? x - 6 : x + 6);
-      clearLabel.setAttribute("text-anchor", nearRight ? "end" : "start");
-      clearLabel.setAttribute("y", L.Y1 + 8);
-      verdict.classList.toggle("bad", lost);
-      verdict.textContent = lost
-        ? `Unstable. The generator loses synchronism about ${run.lostAt.toFixed(2)} s after the fault.`
-        : `Stable. The rotor angle peaks at ${Math.round(run.peak * DEG)}° and swings back.`;
-      if (animate && !reduceMotion) {
-        const len = trace.getTotalLength();
-        trace.style.transition = "none";
-        trace.style.strokeDasharray = len; trace.style.strokeDashoffset = len;
-        trace.getBoundingClientRect();
-        trace.style.transition = "stroke-dashoffset 1.6s ease-out";
-        trace.style.strokeDashoffset = 0;
-      } else {
-        trace.style.transition = "none"; trace.style.strokeDasharray = ""; trace.style.strokeDashoffset = "";
-      }
-    }
-    axes(); render(false);
-    slider.addEventListener("input", () => render(false));
-    let narrowNow = L.narrow;
-    window.addEventListener("resize", () => {
-      const n = svg.parentElement.clientWidth < 520;
-      if (n !== narrowNow) { narrowNow = n; axes(); render(false); }
-    });
-    // Draw the curve once when the demo scrolls into view
-    if ("IntersectionObserver" in window && !reduceMotion) {
-      const once = new IntersectionObserver(es => { if (es[0].isIntersecting) { render(true); once.disconnect(); } }, { threshold: 0.5 });
-      once.observe(svg);
-    }
-  })();
-
-  /* ---------- three-bus power flow demo (Newton-Raphson) ---------- */
-  (function () {
-    const BASE = 100, V1 = 1.02, TANPHI = Math.tan(Math.acos(0.95));
-    const LINES = [
-      { i: 0, j: 1, r: 0.02, x: 0.08, b: 0.04 },
-      { i: 0, j: 2, r: 0.02, x: 0.06, b: 0.03 },
-      { i: 1, j: 2, r: 0.01, x: 0.05, b: 0.02 }
-    ];
-    // complex helpers [re, im]
-    const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
-    const sub = (a, b) => [a[0] - b[0], a[1] - b[1]];
-    const mul = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];
-    const conj = a => [a[0], -a[1]];
-    const inv = a => { const m = a[0] * a[0] + a[1] * a[1]; return [a[0] / m, -a[1] / m]; };
-    const polar = (m, th) => [m * Math.cos(th), m * Math.sin(th)];
-
-    LINES.forEach(l => { l.y = inv([l.r, l.x]); l.ysh = [0, l.b / 2]; });
-    const Y = [[[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0]]];
-    LINES.forEach(l => {
-      Y[l.i][l.i] = add(Y[l.i][l.i], add(l.y, l.ysh));
-      Y[l.j][l.j] = add(Y[l.j][l.j], add(l.y, l.ysh));
-      Y[l.i][l.j] = sub(Y[l.i][l.j], l.y);
-      Y[l.j][l.i] = sub(Y[l.j][l.i], l.y);
-    });
-
-    const volts = x => [polar(V1, 0), polar(x[2], x[0]), polar(x[3], x[1])];
-    function injections(V) {
-      return V.map((Vi, i) => {
-        let I = [0, 0];
-        for (let j = 0; j < 3; j++) I = add(I, mul(Y[i][j], V[j]));
-        return mul(Vi, conj(I));
-      });
-    }
-    function mismatch(x, Ps, Qs) {
-      const S = injections(volts(x));
-      return [S[1][0] - Ps[0], S[2][0] - Ps[1], S[1][1] - Qs[0], S[2][1] - Qs[1]];
-    }
-    function solveLinear(A, b) {
-      const n = b.length, M = A.map((r, i) => [...r, b[i]]);
-      for (let c = 0; c < n; c++) {
-        let p = c; for (let r = c + 1; r < n; r++) if (Math.abs(M[r][c]) > Math.abs(M[p][c])) p = r;
-        [M[c], M[p]] = [M[p], M[c]];
-        if (Math.abs(M[c][c]) < 1e-12) return null;
-        for (let r = c + 1; r < n; r++) { const f = M[r][c] / M[c][c]; for (let k = c; k <= n; k++) M[r][k] -= f * M[c][k]; }
-      }
-      const xs = new Array(n).fill(0);
-      for (let r = n - 1; r >= 0; r--) { let s = M[r][n]; for (let k = r + 1; k < n; k++) s -= M[r][k] * xs[k]; xs[r] = s / M[r][r]; }
-      return xs;
-    }
-    function newton(P2, P3) {
-      const Ps = [-P2, -P3], Qs = [-P2 * TANPHI, -P3 * TANPHI];
-      let x = [0, 0, 1, 1];
-      for (let it = 0; it < 25; it++) {
-        const F = mismatch(x, Ps, Qs);
-        if (Math.max(...F.map(Math.abs)) < 1e-8) return { x, it };
-        const J = [[], [], [], []], h = 1e-7;
-        for (let c = 0; c < 4; c++) {
-          const xp = x.slice(); xp[c] += h;
-          const Fp = mismatch(xp, Ps, Qs);
-          for (let r = 0; r < 4; r++) J[r][c] = (Fp[r] - F[r]) / h;
-        }
-        const dx = solveLinear(J, F);
-        if (!dx) return null;
-        x = x.map((v, i) => v - dx[i]);
-        if (x[2] < 0.3 || x[3] < 0.3 || !x.every(Number.isFinite)) return null;
-      }
-      return null;
-    }
-
-    // drawing
-    const POS = [[112, 70], [468, 130], [280, 330]];
-    const svg = document.getElementById("pfSvg");
-    const g = document.getElementById("pfLines");
-    const parts = LINES.map(l => {
-      const [x1, y1] = POS[l.i], [x2, y2] = POS[l.j];
-      const base = el("line", { x1, y1, x2, y2, class: "line-base", "stroke-width": 12 });
-      const flow = el("line", { class: "line-flow" });
-      const arrow = el("path", { class: "arrow", d: "M-9 -7 L9 0 L-9 7 z" });
-      const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
-      // label offset perpendicular to the line
-      const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy);
-      let nx = -dy / len, ny = dx / len;
-      if (l.i === 1 && l.j === 2) { nx = -nx; ny = -ny; }
-      const label = el("text", { class: "flow-label", x: mx + nx * 30, y: my + ny * 30 + 5, "text-anchor": "middle" });
-      g.append(base, flow, arrow, label);
-      return { l, base, flow, arrow, label, x1, y1, x2, y2, mx, my };
-    });
-
-    const p2 = document.getElementById("p2"), p3 = document.getElementById("p3");
-    const p2Out = document.getElementById("p2Out"), p3Out = document.getElementById("p3Out");
-    const v2 = document.getElementById("v2"), v3 = document.getElementById("v3");
-    const verdict = document.getElementById("pfVerdict");
-    const genEl = document.getElementById("pfGen"), lossEl = document.getElementById("pfLoss");
-
-    function update() {
-      const P2 = Number(p2.value), P3 = Number(p3.value);
-      p2Out.innerHTML = `${P2}<small>MW</small>`; p3Out.innerHTML = `${P3}<small>MW</small>`;
-      const sol = newton(P2 / BASE, P3 / BASE);
-      svg.classList.toggle("collapsed", !sol);
-      if (!sol) {
-        verdict.classList.add("bad");
-        verdict.textContent = "No solution. Newton-Raphson does not converge: the network cannot supply this load (voltage collapse).";
-        v2.textContent = "–"; v3.textContent = "–";
-        v2.classList.add("low"); v3.classList.add("low");
-        parts.forEach(p => { p.label.textContent = ""; p.flow.style.opacity = 0; p.arrow.style.opacity = 0; });
-        genEl.textContent = "–"; lossEl.textContent = "–";
-        return;
-      }
-      const V = volts(sol.x);
-      let losses = 0;
-      parts.forEach(p => {
-        const Vi = V[p.l.i], Vj = V[p.l.j];
-        const Sij = mul(Vi, conj(add(mul(sub(Vi, Vj), p.l.y), mul(Vi, p.l.ysh))));
-        const Sji = mul(Vj, conj(add(mul(sub(Vj, Vi), p.l.y), mul(Vj, p.l.ysh))));
-        losses += Sij[0] + Sji[0];
-        const P = Sij[0] * BASE;                 // MW leaving bus i
-        const fwd = P >= 0, mag = Math.abs(P);
-        const [ax, ay, bx, by] = fwd ? [p.x1, p.y1, p.x2, p.y2] : [p.x2, p.y2, p.x1, p.y1];
-        p.flow.setAttribute("x1", ax); p.flow.setAttribute("y1", ay);
-        p.flow.setAttribute("x2", bx); p.flow.setAttribute("y2", by);
-        const w = Math.min(8, 2.5 + mag / 70);
-        p.flow.setAttribute("stroke-width", w.toFixed(1));
-        p.flow.style.animationDuration = (1.6 / (0.25 + mag / 120)).toFixed(2) + "s";
-        p.flow.style.opacity = mag < 1 ? 0 : 1;
-        const ang = Math.atan2(by - ay, bx - ax) * 180 / Math.PI;
-        p.arrow.setAttribute("transform", `translate(${p.mx} ${p.my}) rotate(${ang}) scale(${(0.9 + w / 10).toFixed(2)})`);
-        p.arrow.style.opacity = mag < 1 ? 0 : 1;
-        p.label.textContent = `${Math.round(mag)} MW`;
-      });
-      const setV = (node, val) => { node.textContent = `${val.toFixed(3)} pu`; node.classList.toggle("low", val < 0.95); };
-      setV(v2, sol.x[2]); setV(v3, sol.x[3]);
-      const lowV = sol.x[2] < 0.95 || sol.x[3] < 0.95;
-      verdict.classList.toggle("bad", lowV);
-      verdict.textContent = lowV
-        ? `Solved in ${sol.it} Newton-Raphson iterations, but a bus voltage is below 0.95 pu.`
-        : `Solved in ${sol.it} Newton-Raphson iterations. All voltages are within limits.`;
-      genEl.textContent = `${Math.round(P2 + P3 + losses * BASE)} MW`;
-      lossEl.textContent = `${(losses * BASE).toFixed(1)} MW`;
-    }
-    p2.addEventListener("input", update); p3.addEventListener("input", update);
-    update();
-  })();
+  lastNarrow = L.narrow;
+  render(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 })();
 </script>
 </body>

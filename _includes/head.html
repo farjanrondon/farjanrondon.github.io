@@ -1,0 +1,37 @@
+{%- comment -%}
+  Everything that goes inside <head>. Titles and descriptions come from the
+  page's front matter when it has them, and from _config.yml otherwise.
+{%- endcomment -%}
+{%- if page.title -%}
+  {%- assign page_title = page.title | append: " | " | append: site.title -%}
+{%- else -%}
+  {%- assign page_title = site.title | append: ", " | append: site.data.profile.role -%}
+{%- endif -%}
+{%- assign page_description = page.summary | default: site.description | strip_newlines | strip -%}
+{%- assign share_image = site.data.hero.image -%}
+{%- if page.cover -%}
+  {%- unless page.cover contains ".svg" -%}
+    {%- assign share_image = "/assets/img/projects/" | append: page.slug | append: "/" | append: page.cover -%}
+  {%- endunless -%}
+{%- endif -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_description | escape }}">
+<meta name="author" content="{{ site.data.profile.name | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ page_description | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ share_image | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#EEF1F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101614" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316212B'/%3E%3Cpath d='M5 16c2.3-7.5 4.7-7.5 7 0s4.7 7.5 7 0 4.7-7.5 7 0' fill='none' stroke='%23E09A62' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,400..700;1,400&family=Sofia+Sans+Extra+Condensed:wght@500..800&display=swap">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">

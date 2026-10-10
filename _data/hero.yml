@@ -1,0 +1,28 @@
+# The annotated photo at the top of the home page.
+# x and y place each numbered marker, in % of the image width and height.
+image: /assets/img/hero/probe-board.jpg
+width: 1800
+height: 1212
+alt: The printed circuit board of the on-state voltage probe, inside its enclosure.
+caption: The on-state voltage probe I designed and built for my capstone.
+link: /projects/on-state-voltage-probe/
+link_text: See how it was designed
+markers:
+  - x: 77.5
+    y: 28
+    label: Collector and emitter terminals, rated 1200 V peak.
+  - x: 82
+    y: 52
+    label: Matched SiC Schottky and TVS diode pairs, one for each current path.
+  - x: 51.6
+    y: 38.6
+    label: Isolation amplifier that carries the reading to the low-voltage side.
+  - x: 13.5
+    y: 54
+    label: BNC output to the oscilloscope.
+  - x: 52
+    y: 19.5
+    label: Optocoupler that drives the auxiliary MOSFET from the gate signal.
+  - x: 52.5
+    y: 75.5
+    label: Isolated DC/DC converter that powers the high-voltage side.

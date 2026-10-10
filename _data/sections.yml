@@ -1,0 +1,20 @@
+# Sections on the home page, in this order. Each project picks one with "section: <id>".
+# To add a section, copy one block, give it a new id, and use that id in your projects.
+
+- id: power-electronics
+  title: Power electronics and instrumentation
+  intro: >-
+    Hardware I designed and built, the measurements that came out of it,
+    and converter design in simulation.
+
+- id: machines
+  title: Electrical machines
+  intro: >-
+    Standard tests on induction and synchronous machines in the energy
+    conversion lab, from equivalent circuits to grid synchronization.
+
+- id: power-systems
+  title: Power systems and high voltage
+  intro: >-
+    Software for load flow and stability studies, and a field simulation of
+    cable insulation.

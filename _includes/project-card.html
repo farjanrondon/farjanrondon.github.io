@@ -1,0 +1,30 @@
+{%- comment -%}
+  One project on the home page. Everything comes from the project's front matter.
+  Parameter: project
+{%- endcomment -%}
+{%- assign p = include.project -%}
+{%- assign img_dir = "/assets/img/projects/" | append: p.slug | append: "/" -%}
+<article class="card">
+  <div class="card__media{% if p.cover_fit == 'contain' %} card__media--contain{% endif %}">
+    {%- if p.cover %}
+    <img src="{{ img_dir | append: p.cover | relative_url }}" alt="{{ p.cover_alt | escape }}" loading="lazy" decoding="async">
+    {%- endif %}
+    {%- if p.status %}
+    <span class="status">{{ p.status }}</span>
+    {%- endif %}
+  </div>
+  <div class="card__body">
+    <p class="card__meta">
+      <span>{{ p.context }}</span>
+      {%- if p.year %}
+      <span class="card__year">{{ p.year }}</span>
+      {%- endif %}
+    </p>
+    <h4 class="card__title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h4>
+    <p class="card__summary">{{ p.summary }}</p>
+    {% include rating-plate.html specs=p.specs %}
+    {%- if p.tools %}
+    <p class="card__tools">{{ p.tools | join: ", " }}</p>
+    {%- endif %}
+  </div>
+</article>

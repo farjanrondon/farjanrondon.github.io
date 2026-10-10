@@ -1,0 +1,130 @@
+---
+layout: default
+---
+{%- comment -%}
+  Layout of every project page. The fields at the top of a project file fill the
+  header, the rating plate and the gallery; the text below them becomes the body.
+{%- endcomment -%}
+{%- assign img_dir = "/assets/img/projects/" | append: page.slug | append: "/" -%}
+{%- assign section = site.data.sections | where: "id", page.section | first -%}
+
+{%- comment -%} Previous and next project, in the same order as the home page. {%- endcomment -%}
+{%- assign ordered = "" | split: "" -%}
+{%- for s in site.data.sections -%}
+  {%- assign in_section = site.projects | where: "section", s.id | sort: "order" -%}
+  {%- assign ordered = ordered | concat: in_section -%}
+{%- endfor -%}
+{%- assign position = -1 -%}
+{%- for p in ordered -%}
+  {%- if p.url == page.url -%}{%- assign position = forloop.index0 -%}{%- endif -%}
+{%- endfor -%}
+{%- assign prev_index = position | minus: 1 -%}
+{%- assign next_index = position | plus: 1 -%}
+{%- assign prev_project = nil -%}
+{%- assign next_project = nil -%}
+{%- if position >= 0 -%}
+  {%- if prev_index >= 0 -%}{%- assign prev_project = ordered[prev_index] -%}{%- endif -%}
+  {%- if next_index < ordered.size -%}{%- assign next_project = ordered[next_index] -%}{%- endif -%}
+{%- endif %}
+
+<article class="project">
+  <header class="project__head">
+    <div class="wrap">
+      {%- if section %}
+      <p class="crumb"><a href="{{ '/' | relative_url }}#{{ section.id }}">{{ section.title }}</a></p>
+      {%- endif %}
+      <h1 class="project__title">{{ page.title }}</h1>
+      {%- if page.status %}
+      <p class="status status--inline">{{ page.status }}</p>
+      {%- endif %}
+      <p class="project__lede">{{ page.summary }}</p>
+
+      <div class="nameplate">
+        <dl class="nameplate__meta">
+          {%- if page.context %}
+          <div><dt>Context</dt><dd>{{ page.context }}</dd></div>
+          {%- endif %}
+          {%- if page.year %}
+          <div><dt>Year</dt><dd>{{ page.year }}</dd></div>
+          {%- endif %}
+          {%- if page.tools %}
+          <div><dt>Tools</dt><dd>{{ page.tools | join: ", " }}</dd></div>
+          {%- endif %}
+        </dl>
+        {% include rating-plate.html specs=page.specs large="yes" %}
+      </div>
+
+      {%- if page.links %}
+      <ul class="project__links">
+        {%- for link in page.links %}
+        <li><a class="button" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}<svg class="icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3 4 12"/></svg></a></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </div>
+  </header>
+
+  <div class="project__body">
+    <div class="wrap project__layout{% if page.cover %} project__layout--with-cover{% endif %}">
+      {%- if page.cover %}
+      {%- if page.cover_fit == "contain" %}{% assign cover_kind = "frame--panel" %}{% else %}{% assign cover_kind = "frame--photo" %}{% endif %}
+      <figure class="project__cover">
+        <a class="frame {{ cover_kind }}" href="{{ img_dir | append: page.cover | relative_url }}" data-lightbox>
+          <img src="{{ img_dir | append: page.cover | relative_url }}" alt="{{ page.cover_alt | escape }}" decoding="async">
+        </a>
+        {%- if page.cover_caption %}
+        <figcaption>{{ page.cover_caption }}</figcaption>
+        {%- endif %}
+      </figure>
+      {%- endif %}
+      <div class="prose">
+{{ content }}
+      </div>
+    </div>
+  </div>
+
+  {%- if page.demo == "swing" %}
+  {% include swing-demo.html %}
+  {%- endif %}
+
+  {%- if page.gallery and page.gallery.size > 0 %}
+  <section class="gallery" aria-labelledby="figures-title">
+    <div class="wrap">
+      <h2 id="figures-title" class="gallery__title">Figures</h2>
+      <div class="gallery__grid">
+        {%- for item in page.gallery %}
+        {%- assign file_lower = item.file | downcase %}
+        {%- if file_lower contains ".jpg" or file_lower contains ".jpeg" %}{% assign frame_kind = "frame--photo" %}{% else %}{% assign frame_kind = "frame--panel" %}{% endif %}
+        <figure class="shot{% if item.wide %} shot--wide{% endif %}">
+          <a class="frame {{ frame_kind }}" href="{{ img_dir | append: item.file | relative_url }}" data-lightbox>
+            <img src="{{ img_dir | append: item.file | relative_url }}" alt="{{ item.alt | default: item.caption | escape }}" loading="lazy" decoding="async">
+          </a>
+          {%- if item.caption %}
+          <figcaption>{{ item.caption }}</figcaption>
+          {%- endif %}
+        </figure>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+  {%- endif %}
+
+  {%- if prev_project or next_project %}
+  <nav class="pager" aria-label="More projects">
+    <div class="wrap pager__inner">
+      {%- if prev_project %}
+      <a class="pager__link pager__link--prev" href="{{ prev_project.url | relative_url }}">
+        <span class="pager__hint">Previous project</span>
+        <span class="pager__title">{{ prev_project.title }}</span>
+      </a>
+      {%- endif %}
+      {%- if next_project %}
+      <a class="pager__link pager__link--next" href="{{ next_project.url | relative_url }}">
+        <span class="pager__hint">Next project</span>
+        <span class="pager__title">{{ next_project.title }}</span>
+      </a>
+      {%- endif %}
+    </div>
+  </nav>
+  {%- endif %}
+</article>

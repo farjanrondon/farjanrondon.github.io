@@ -1,0 +1,61 @@
+{%- comment -%}
+  Interactive transient stability demo. A project shows it with "demo: swing"
+  in its front matter. The script is assets/js/swing-demo.js.
+{%- endcomment -%}
+<section class="demo" aria-labelledby="demo-title">
+  <div class="wrap">
+    <div class="demo__head">
+      <h2 id="demo-title">How fast does a fault need to be cleared?</h2>
+      <p>A generator feeds the grid through two parallel lines, and a three-phase fault hits one of them. Move the clearing time and watch the rotor angle: clear the fault quickly and the machine swings back; wait too long and it loses synchronism.</p>
+    </div>
+
+    <div class="demo__grid">
+      <figure class="demo__plot">
+        <svg id="swing" viewBox="0 0 640 380" role="img" aria-labelledby="swing-desc">
+          <desc id="swing-desc">Rotor angle in degrees against time in seconds after the fault, for the selected clearing time.</desc>
+          <rect id="swing-fault" class="swing__fault" x="0" y="0" width="0" height="0"></rect>
+          <g id="swing-axes"></g>
+          <line id="swing-clear" class="swing__clear" x1="0" y1="20" x2="0" y2="330"></line>
+          <text id="swing-clear-label" class="swing__label swing__label--clear" x="0" y="14">Fault cleared</text>
+          <polyline id="swing-trace" class="swing__trace" points=""></polyline>
+        </svg>
+      </figure>
+
+      <div class="demo__side">
+        <figure class="demo__oneline">
+          <svg viewBox="0 0 300 150" role="img" aria-labelledby="oneline-desc">
+            <desc id="oneline-desc">One-line diagram: a generator connected to a bus, two parallel lines to the grid, and a fault on the lower line with a breaker at each end.</desc>
+            <circle cx="28" cy="75" r="18" class="ol__wire"></circle>
+            <path d="M18 75 q5 -9 10 0 t10 0" class="ol__wire"></path>
+            <line x1="46" y1="75" x2="78" y2="75" class="ol__wire"></line>
+            <line x1="78" y1="40" x2="78" y2="110" class="ol__bus"></line>
+            <line x1="78" y1="50" x2="232" y2="50" class="ol__wire"></line>
+            <line x1="78" y1="100" x2="232" y2="100" class="ol__wire"></line>
+            <rect x="94" y="93" width="14" height="14" class="ol__breaker"></rect>
+            <rect x="202" y="93" width="14" height="14" class="ol__breaker"></rect>
+            <path d="M126 76 l10 12 l-7 3 l10 12" class="ol__fault"></path>
+            <line x1="232" y1="40" x2="232" y2="110" class="ol__bus"></line>
+            <line x1="232" y1="75" x2="258" y2="75" class="ol__wire"></line>
+            <path d="M258 60 v30 M264 64 v22 M270 68 v14" class="ol__wire"></path>
+            <text x="10" y="122">Generator</text>
+            <text x="140" y="40">Line 1</text>
+            <text x="140" y="128">Line 2</text>
+            <text x="246" y="122">Grid</text>
+          </svg>
+          <figcaption>The fault on line 2 is cleared by opening its two breakers.</figcaption>
+        </figure>
+
+        <div class="demo__control">
+          <label for="swing-tc">Fault clearing time</label>
+          <p class="demo__value"><output id="swing-tc-value" for="swing-tc">150</output> ms</p>
+          <input type="range" id="swing-tc" min="40" max="400" step="5" value="150" aria-describedby="swing-verdict">
+          <div class="demo__scale" aria-hidden="true"><span>40 ms</span><span>400 ms</span></div>
+          <p class="demo__verdict" id="swing-verdict" aria-live="polite"></p>
+          <p class="demo__cct" id="swing-cct"></p>
+        </div>
+      </div>
+    </div>
+
+    <p class="demo__note">Classical single-machine model at 60 Hz: H = 5 s, mechanical power 1.0 pu, and maximum electrical power of 2.0 pu before the fault, 0.5 pu during it and 1.5 pu after line 2 is disconnected. Your browser integrates the swing equation with fourth-order Runge-Kutta.</p>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+{%- comment -%}
+  The footer is drawn like the title block of an engineering drawing.
+  "Revision" shows the month the site was last rebuilt.
+{%- endcomment -%}
+{%- assign profile = site.data.profile -%}
+<footer class="site-footer">
+  <div class="wrap">
+    <dl class="title-block">
+      <div class="title-block__cell title-block__cell--name">
+        <dt>Drawn by</dt>
+        <dd class="title-block__name">{{ profile.name }}</dd>
+      </div>
+      <div class="title-block__cell title-block__cell--title">
+        <dt>Title</dt>
+        <dd>{{ page.title | default: "Portfolio" }}</dd>
+      </div>
+      <div class="title-block__cell title-block__cell--wide">
+        <dt>Location</dt>
+        <dd>{{ profile.location }}</dd>
+      </div>
+      <div class="title-block__cell title-block__cell--wide">
+        <dt>Contact</dt>
+        <dd class="title-block__links">
+          <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+          <a href="{{ profile.github }}" target="_blank" rel="noopener">GitHub</a>
+          {%- if profile.linkedin %}
+          <a href="{{ profile.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+          {%- endif %}
+        </dd>
+      </div>
+      <div class="title-block__cell title-block__cell--rev">
+        <dt>Revision</dt>
+        <dd>{{ site.time | date: "%b %Y" }}</dd>
+      </div>
+    </dl>
+  </div>
+</footer>

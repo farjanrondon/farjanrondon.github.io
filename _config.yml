@@ -1,0 +1,34 @@
+# Site settings. After changing this file, GitHub rebuilds the site in about a minute.
+title: Farjan Rondón
+description: >-
+  Electrical engineer focused on power electronics. Hardware I designed and built,
+  lab testing, converter simulation, electrical machines and power systems.
+url: https://farjanrondon.github.io
+baseurl: ""
+lang: en
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Every file in the _projects folder becomes a project page at /projects/<file-name>/
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

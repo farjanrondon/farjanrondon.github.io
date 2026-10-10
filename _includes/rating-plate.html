@@ -1,0 +1,16 @@
+{%- comment -%}
+  The three key numbers of a project, shown like a machine's rating plate.
+  Used on the home page cards and, larger, at the top of each project page.
+  Parameters: specs (the list from the front matter), large (true or empty).
+{%- endcomment -%}
+{%- assign specs = include.specs -%}
+{%- if specs and specs.size > 0 -%}
+<dl class="plate{% if include.large %} plate--large{% endif %}">
+  {%- for spec in specs %}
+  <div class="plate__cell">
+    <dt>{{ spec.label }}</dt>
+    <dd>{{ spec.value }}</dd>
+  </div>
+  {%- endfor %}
+</dl>
+{%- endif -%}

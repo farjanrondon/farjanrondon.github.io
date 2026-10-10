@@ -1,0 +1,15 @@
+{%- assign profile = site.data.profile -%}
+{%- if page.url == "/" -%}{%- assign home = "" -%}{%- else -%}{%- assign home = "/" | relative_url -%}{%- endif -%}
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7"/><path d="M5 16c2.3-7.5 4.7-7.5 7 0s4.7 7.5 7 0 4.7-7.5 7 0"/></svg>
+      <span>{{ profile.name }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="{{ home }}#projects">Projects</a>
+      <a href="{{ home }}#about">About</a>
+      <a href="{{ profile.cv | relative_url }}" target="_blank" rel="noopener">CV</a>
+    </nav>
+  </div>
+</header>

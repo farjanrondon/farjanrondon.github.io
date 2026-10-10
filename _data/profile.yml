@@ -1,0 +1,89 @@
+# Your details. The home page header, the About section and the footer read from here.
+name: Farjan Rondón
+role: Electrical Engineer
+focus: Power electronics
+intro: >-
+  I’m an electrical engineer from Universidad Simón Bolívar, focused on power
+  electronics. I enjoy taking a circuit from simulation to the bench, measuring
+  it and working out why the results look the way they do. Below are my
+  projects, from the probe I built for my capstone to machine tests and power
+  system software.
+location: Caracas, Venezuela
+availability: Open to relocation
+email: farjan.santos@gmail.com
+github: https://github.com/farjanrondon
+# Put your LinkedIn address here to show a LinkedIn button, e.g. https://www.linkedin.com/in/your-name
+linkedin:
+# The CV file in the root of this repository
+cv: /CV_Farjan_Rondon.pdf
+
+about: >-
+  I completed my degree in Electrical Engineering at Universidad Simón Bolívar
+  in Caracas. My year-long capstone, estimating IGBT junction temperatures from
+  their electrical parameters, is where I learned to build test setups, design
+  measurement hardware and process large sets of measurements. I’m looking for
+  a role where I can design and test electronic and power hardware in an
+  international team.
+
+experience:
+  - role: Undergraduate Researcher (capstone project)
+    org: Universidad Simón Bolívar
+    place: Caracas, Venezuela
+    dates: Jan 2025 – Feb 2026
+    text: >-
+      Studied three ways to estimate the junction temperature of IGBTs and power
+      diodes from their electrical parameters: on-state voltage drop, turn-off
+      di/dt and internal gate resistance. Built the test setups and an on-state
+      voltage probe, and processed the measurements in MATLAB.
+  - role: Web Developer
+    org: Universidad ISEP
+    place: Remote, Mexico
+    dates: Mar 2021 – May 2021
+    text: >-
+      Developed custom Odoo modules in Python to automate how lead data was
+      captured, organized and stored. Fixed bugs, updated legacy code and wrote
+      the technical documentation.
+
+education:
+  - degree: Bachelor’s degree in Electrical Engineering
+    org: Universidad Simón Bolívar
+    place: Caracas, Venezuela
+    dates: 2018 – 2026
+    text: >-
+      Focused on power electronics and power systems, with lab work on
+      transformers, induction and synchronous machines, and high-voltage tests
+      with AC, DC and impulse voltages.
+
+courses:
+  - name: Introduction to Power Electronic Converter Design
+    by: Universidad Simón Bolívar
+    date: Mar 2025
+  - name: High-Voltage Installations and Insulation Studies
+    by: Universidad Simón Bolívar
+    date: Mar 2025
+  - name: Motor and Critical Load Protection in Industry and Mining using ETAP
+    by: Greener Engineering School
+    date: Mar 2025
+  - name: "Earthing Systems: Measurement Methods"
+    by: Universidad Simón Bolívar
+    date: Mar 2026
+  - name: Data Analysis with Python
+    by: IBM
+    date: Jan 2021
+  - name: Python Basics for Data Science
+    by: IBM
+    date: Jan 2021
+
+skills:
+  - group: Simulation and analysis
+    items: MATLAB (advanced), LTspice (advanced), PLECS (advanced), QuickField FEM (intermediate)
+  - group: Hardware and CAD
+    items: Schematic capture and PCB layout in KiCad (intermediate), AutoCAD (intermediate)
+  - group: Laboratory
+    items: Power electronics test setups, oscilloscope measurements, calibration, three-phase tests on transformers and electrical machines
+  - group: Programming and data
+    items: MATLAB scripting, Python, Excel
+  - group: Power systems
+    items: ETAP (intermediate), DIgSILENT PowerFactory (basic)
+
+languages: Spanish (native), English (fluent)
